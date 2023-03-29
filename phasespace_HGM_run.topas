@@ -1,0 +1,111 @@
+b:Gr/ViewA/Active	= "true"
+b:Gr/ViewB/Active	= "false"
+b:Gr/ViewC/Active	= "false"
+b:Gr/ViewD/Active	= "false"
+
+#sv:Ph/Default/Modules = 1 "g4em-standard_opt1"
+#d:Ph/Default/CutForElectron = 0.5 um # overrides CutForAllParticles for Electron
+sv:Ph/Default/Modules = 2 "g4em-standard_opt4" "g4em-penelope"
+
+i:Ts/ShowHistoryCountAtInterval = 100000
+i:Ts/NumberOfThreads = 1
+b:Ge/CheckForOverlaps = "false"
+i:Ts/Seed = 29
+
+
+b:Ts/PauseBeforeQuit = "false"
+b:Ts/UseQt = "false"
+
+# includeFile = /Users/keplerdomurat-sousa/Desktop/electron_cascade_tests/ribbon_phase_space_test.topas
+
+# s:Ge/HGM/Parent = "World"
+
+includeFile = /Users/keplerdomurat-sousa/Desktop/electron_cascade_tests/millichannel_form.topas
+
+s:Ge/millichannel/Parent = "World"
+
+
+s:Ge/World/Material  = "Vacuum"
+d:Ge/World/HLX       = 10.0 m
+d:Ge/World/HLY       = 10.0 m
+d:Ge/World/HLZ       = 10.0 m
+b:Ge/World/Invisible = "TRUE"
+
+s:So/source/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
+s:So/source/Component = "BeamPosition"
+s:So/source/BeamParticle = "gamma"
+d:So/source/BeamEnergy = 511 keV
+u:So/source/BeamEnergySpread = 0.0
+s:So/source/BeamPositionDistribution = "Flat" # None, Flat or Gaussian
+s:So/source/BeamPositionCutoffShape = "Rectangle" # Rectangle or Ellipse (if Flat or Gaussian)
+d:So/source/BeamPositionCutoffX = 2.0 mm # X extent of position (if Flat or Gaussian)
+d:So/source/BeamPositionCutoffY = 2.0 mm # Y extent of position (if Flat or Gaussian)
+d:So/source/BeamPositionSpreadX = 0.1 mm # distribution (if Gaussian)
+d:So/source/BeamPositionSpreadY = 0.1 mm # distribution (if Gaussian)
+s:So/source/BeamAngularDistribution = "None" # None, Flat or Gaussian
+i:So/source/NumberOfHistoriesInRun = 1
+
+# Beam position (S)
+s:Ge/BeamPosition/Parent   = "World"
+s:Ge/BeamPosition/Type     = "Group"
+d:Ge/BeamPosition/TransX   = -3.001 m
+d:Ge/BeamPosition/TransY   = 0. m
+d:Ge/BeamPosition/TransZ   = 0. m
+
+d:Ge/BeamPosition/RotX     = 0. deg
+d:Ge/BeamPosition/RotY     = -90. deg
+d:Ge/BeamPosition/RotZ     = 0. deg
+
+#s:Sc/DetectorTuple/Quantity			= "MyNtupleEnergy"
+#s:Sc/DetectorTuple/Component			= "HGM"
+#b:Sc/DetectorTuple/PropagateToChildren	= "False"
+#s:Sc/DetectorTuple/OutputType			= "ASCII"
+#s:Sc/DetectorTuple/IfOutputFileAlreadyExists	= "Overwrite"
+#sv:Sc/DetectorTuple/OnlyIncludeParticlesNotCharged = 1 "neutral"
+#sv:Sc/DetectorTuple/OnlyIncludeParticlesfromprocess = 1 "compt"
+
+#s:Sc/ParticleCount/Quantity = "OriginCount"
+#s:Sc/ParticleCount/Component = "HGM"
+##sv:Sc/ParticleCount/OnlyIncludeParticlesNamed = 1 "neutron"
+#b:Sc/ParticleCount/PropagateToChildren = "True"
+#s:Sc/ParticleCount/IfOutputFileAlreadyExists   = "Overwrite"
+#s:Sc/ExitGammas/Quantity = "SurfaceTrackCount"
+#s:Sc/ExitGammas/surface = "HGM/XPlusSurface"
+#s:Sc/ExitGammas/IfOutputFileAlreadyExists = "overwrite"
+#sv:sc/ExitGammas/OnlyIncludeParticlesNamed = 1 "gamma"
+#d:sc/ExitGammas/OnlyIncludeIfIncidentParticleKEAbove = 510 keV
+
+s:Gr/ViewA/Type           = "OpenGL"
+sv:Gr/ViewA/VisibleWorlds = 1 "All"
+i:Gr/ViewA/WindowSizeX    = 900
+i:Gr/ViewA/WindowSizeY    = 900
+d:Gr/ViewA/Theta          = 0 deg
+d:Gr/ViewA/Phi            = 0 deg
+u:Gr/ViewA/Zoom	   = 5
+
+# s:Gr/ViewB/Type           = "OpenGL"
+# sv:Gr/ViewB/VisibleWorlds = 1 "All"
+# i:Gr/ViewB/WindowSizeX    = 900
+# i:Gr/ViewB/WindowSizeY    = 900
+# d:Gr/ViewB/Theta          = 45 deg
+# d:Gr/ViewB/Phi            = 45 deg
+# u:Gr/ViewB/Zoom	   = 1
+
+# s:Gr/ViewC/Type           = "OpenGL"
+# sv:Gr/ViewC/VisibleWorlds = 1 "All"
+# i:Gr/ViewC/WindowSizeX    = 900
+# i:Gr/ViewC/WindowSizeY    = 900
+# d:Gr/ViewC/Theta          = 90 deg
+# d:Gr/ViewC/Phi            = 0 deg
+# u:Gr/ViewC/Zoom	   = 40
+
+# s:Gr/ViewD/Type           = "OpenGL"
+# sv:Gr/ViewD/VisibleWorlds = 1 "All"
+# i:Gr/ViewD/WindowSizeX    = 900
+# i:Gr/ViewD/WindowSizeY    = 900
+# d:Gr/ViewD/Theta          = 0 deg
+# d:Gr/ViewD/Phi            = 0 deg
+# u:Gr/ViewD/Zoom	   = 2
+
+
+

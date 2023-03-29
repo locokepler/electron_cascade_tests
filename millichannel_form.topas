@@ -1,0 +1,981 @@
+# A TOPAS file defining the millichannel slab design for testing
+# alpha = 0.0508mm
+# beta = 0.15239999999999998mm
+# gamma = 2.54mm
+# t = 0.15239999999999998mm
+# W = 10mm
+# L = 5mm
+# K = 5mm
+# N = 23.0
+# M = 4
+# material: "G4_GLASS_LEAD"
+
+# the box of the millichannel slab
+s:Ge/millichannel/Type     = "TsBox"
+s:Ge/millichannel/Material = "Vacuum"
+d:Ge/millichannel/HLX = 5.15 mm
+d:Ge/millichannel/HLY = 5.461 mm
+d:Ge/millichannel/HLZ = 2.5 mm
+s:Ge/millichannel/Field                   = "UniformElectroMagnetic"
+u:Ge/millichannel/ElectricFieldDirectionX = -1
+u:Ge/millichannel/ElectricFieldDirectionY = 0
+u:Ge/millichannel/ElectricFieldDirectionZ = 0
+d:Ge/millichannel/ElectricFieldStrength   = 1000 V/mm
+u:Ge/millichannel/MagneticFieldDirectionX = 0
+u:Ge/millichannel/MagneticFieldDirectionY = 1
+u:Ge/millichannel/MagneticFieldDirectionZ = 0
+d:Ge/millichannel/MagneticFieldStrength   = 0.0 tesla
+
+# phase space scorer for the whole HGM (for secondary electron emission)
+s:Sc/full_HGM/Quantity   	 = "PhaseSpace"
+s:Sc/full_HGM/Surface    	 = "millichannel/AnySurface"
+s:Sc/full_HGM/OutputType 	 = "ASCII"
+b:Sc/full_HGM/IncludeTimeOfFlight	 = "True"
+s:Sc/full_HGM/IncludeEmptyHistories 	 = "InSequence"
+b:Sc/full_HGM/IncludeTrackID     	 = "True"
+b:Sc/full_HGM/IncludeRunID       	 = "True"
+sv:Sc/full_HGM/OnlyIncludeParticlesCharged   	 = 1 "negative"
+s:Sc/full_HGM/IfOutputFileAlreadyExists   	 = "Overwrite"
+b:Sc/full_HGM/PropagateToChildren         	 = "true"
+
+# Parallel world plate for observing electrons crossing back of HGM
+s:Ge/BackPlate/Parent = "World"
+b:Ge/BackPlate/IsParallel = "True"
+s:Ge/BackPlate/Type = "TsBox"
+d:Ge/BackPlate/HLX = 0.01 mm
+d:Ge/BackPlate/HLY = 5.461 mm
+d:Ge/BackPlate/HLZ = 2.5 mm
+d:Ge/BackPlate/transx = 5.0 mm
+
+s:Sc/backplane/Quantity = "Phasespace"
+s:Sc/backplane/Surface = "BackPlate/XPlusSurface"
+s:Sc/backplane/OutputType = "ASCII"
+b:Sc/backplane/IncludeTimeOfFlight = "True"
+s:Sc/backplane/IncludeEmptyHistories = "InSequence"
+b:Sc/backplane/IncludeRunID = "True"
+sv:Sc/backplane/OnlyIncludeParticlesCharged = 1 "negative"
+s:Sc/backplane/IfOutputFileAlreadyExists = "Increment"
+b:Sc/backplane/PropagateToChildren = "false"
+
+
+# the holes of the millichannel slab
+# hole 0_0
+s:Ge/0_0/Type = "TsBox"
+s:Ge/0_0/Parent = "millichannel"
+s:Ge/0_0/Material = "G4_GLASS_LEAD"
+d:Ge/0_0/HLX = 5.0 mm
+d:Ge/0_0/HLY = 1.27 mm
+d:Ge/0_0/HLZ = 0.0254 mm
+d:Ge/0_0/TransY = 4.036200000000001 mm
+d:Ge/0_0/TransZ = 2.3222 mm
+
+# hole 0_1
+s:Ge/0_1/Type = "TsBox"
+s:Ge/0_1/Parent = "millichannel"
+s:Ge/0_1/Material = "G4_GLASS_LEAD"
+d:Ge/0_1/HLX = 5.0 mm
+d:Ge/0_1/HLY = 1.27 mm
+d:Ge/0_1/HLZ = 0.0254 mm
+d:Ge/0_1/TransY = 1.3438000000000008 mm
+d:Ge/0_1/TransZ = 2.3222 mm
+
+# hole 0_2
+s:Ge/0_2/Type = "TsBox"
+s:Ge/0_2/Parent = "millichannel"
+s:Ge/0_2/Material = "G4_GLASS_LEAD"
+d:Ge/0_2/HLX = 5.0 mm
+d:Ge/0_2/HLY = 1.27 mm
+d:Ge/0_2/HLZ = 0.0254 mm
+d:Ge/0_2/TransY = -1.3485999999999994 mm
+d:Ge/0_2/TransZ = 2.3222 mm
+
+# hole 0_3
+s:Ge/0_3/Type = "TsBox"
+s:Ge/0_3/Parent = "millichannel"
+s:Ge/0_3/Material = "G4_GLASS_LEAD"
+d:Ge/0_3/HLX = 5.0 mm
+d:Ge/0_3/HLY = 1.27 mm
+d:Ge/0_3/HLZ = 0.0254 mm
+d:Ge/0_3/TransY = -4.041 mm
+d:Ge/0_3/TransZ = 2.3222 mm
+
+# hole 1_0
+s:Ge/1_0/Type = "TsBox"
+s:Ge/1_0/Parent = "millichannel"
+s:Ge/1_0/Material = "G4_GLASS_LEAD"
+d:Ge/1_0/HLX = 5.0 mm
+d:Ge/1_0/HLY = 1.27 mm
+d:Ge/1_0/HLZ = 0.0254 mm
+d:Ge/1_0/TransY = 4.036200000000001 mm
+d:Ge/1_0/TransZ = 2.119 mm
+
+# hole 1_1
+s:Ge/1_1/Type = "TsBox"
+s:Ge/1_1/Parent = "millichannel"
+s:Ge/1_1/Material = "G4_GLASS_LEAD"
+d:Ge/1_1/HLX = 5.0 mm
+d:Ge/1_1/HLY = 1.27 mm
+d:Ge/1_1/HLZ = 0.0254 mm
+d:Ge/1_1/TransY = 1.3438000000000008 mm
+d:Ge/1_1/TransZ = 2.119 mm
+
+# hole 1_2
+s:Ge/1_2/Type = "TsBox"
+s:Ge/1_2/Parent = "millichannel"
+s:Ge/1_2/Material = "G4_GLASS_LEAD"
+d:Ge/1_2/HLX = 5.0 mm
+d:Ge/1_2/HLY = 1.27 mm
+d:Ge/1_2/HLZ = 0.0254 mm
+d:Ge/1_2/TransY = -1.3485999999999994 mm
+d:Ge/1_2/TransZ = 2.119 mm
+
+# hole 1_3
+s:Ge/1_3/Type = "TsBox"
+s:Ge/1_3/Parent = "millichannel"
+s:Ge/1_3/Material = "G4_GLASS_LEAD"
+d:Ge/1_3/HLX = 5.0 mm
+d:Ge/1_3/HLY = 1.27 mm
+d:Ge/1_3/HLZ = 0.0254 mm
+d:Ge/1_3/TransY = -4.041 mm
+d:Ge/1_3/TransZ = 2.119 mm
+
+# hole 2_0
+s:Ge/2_0/Type = "TsBox"
+s:Ge/2_0/Parent = "millichannel"
+s:Ge/2_0/Material = "G4_GLASS_LEAD"
+d:Ge/2_0/HLX = 5.0 mm
+d:Ge/2_0/HLY = 1.27 mm
+d:Ge/2_0/HLZ = 0.0254 mm
+d:Ge/2_0/TransY = 4.036200000000001 mm
+d:Ge/2_0/TransZ = 1.9158 mm
+
+# hole 2_1
+s:Ge/2_1/Type = "TsBox"
+s:Ge/2_1/Parent = "millichannel"
+s:Ge/2_1/Material = "G4_GLASS_LEAD"
+d:Ge/2_1/HLX = 5.0 mm
+d:Ge/2_1/HLY = 1.27 mm
+d:Ge/2_1/HLZ = 0.0254 mm
+d:Ge/2_1/TransY = 1.3438000000000008 mm
+d:Ge/2_1/TransZ = 1.9158 mm
+
+# hole 2_2
+s:Ge/2_2/Type = "TsBox"
+s:Ge/2_2/Parent = "millichannel"
+s:Ge/2_2/Material = "G4_GLASS_LEAD"
+d:Ge/2_2/HLX = 5.0 mm
+d:Ge/2_2/HLY = 1.27 mm
+d:Ge/2_2/HLZ = 0.0254 mm
+d:Ge/2_2/TransY = -1.3485999999999994 mm
+d:Ge/2_2/TransZ = 1.9158 mm
+
+# hole 2_3
+s:Ge/2_3/Type = "TsBox"
+s:Ge/2_3/Parent = "millichannel"
+s:Ge/2_3/Material = "G4_GLASS_LEAD"
+d:Ge/2_3/HLX = 5.0 mm
+d:Ge/2_3/HLY = 1.27 mm
+d:Ge/2_3/HLZ = 0.0254 mm
+d:Ge/2_3/TransY = -4.041 mm
+d:Ge/2_3/TransZ = 1.9158 mm
+
+# hole 3_0
+s:Ge/3_0/Type = "TsBox"
+s:Ge/3_0/Parent = "millichannel"
+s:Ge/3_0/Material = "G4_GLASS_LEAD"
+d:Ge/3_0/HLX = 5.0 mm
+d:Ge/3_0/HLY = 1.27 mm
+d:Ge/3_0/HLZ = 0.0254 mm
+d:Ge/3_0/TransY = 4.036200000000001 mm
+d:Ge/3_0/TransZ = 1.7126000000000001 mm
+
+# hole 3_1
+s:Ge/3_1/Type = "TsBox"
+s:Ge/3_1/Parent = "millichannel"
+s:Ge/3_1/Material = "G4_GLASS_LEAD"
+d:Ge/3_1/HLX = 5.0 mm
+d:Ge/3_1/HLY = 1.27 mm
+d:Ge/3_1/HLZ = 0.0254 mm
+d:Ge/3_1/TransY = 1.3438000000000008 mm
+d:Ge/3_1/TransZ = 1.7126000000000001 mm
+
+# hole 3_2
+s:Ge/3_2/Type = "TsBox"
+s:Ge/3_2/Parent = "millichannel"
+s:Ge/3_2/Material = "G4_GLASS_LEAD"
+d:Ge/3_2/HLX = 5.0 mm
+d:Ge/3_2/HLY = 1.27 mm
+d:Ge/3_2/HLZ = 0.0254 mm
+d:Ge/3_2/TransY = -1.3485999999999994 mm
+d:Ge/3_2/TransZ = 1.7126000000000001 mm
+
+# hole 3_3
+s:Ge/3_3/Type = "TsBox"
+s:Ge/3_3/Parent = "millichannel"
+s:Ge/3_3/Material = "G4_GLASS_LEAD"
+d:Ge/3_3/HLX = 5.0 mm
+d:Ge/3_3/HLY = 1.27 mm
+d:Ge/3_3/HLZ = 0.0254 mm
+d:Ge/3_3/TransY = -4.041 mm
+d:Ge/3_3/TransZ = 1.7126000000000001 mm
+
+# hole 4_0
+s:Ge/4_0/Type = "TsBox"
+s:Ge/4_0/Parent = "millichannel"
+s:Ge/4_0/Material = "G4_GLASS_LEAD"
+d:Ge/4_0/HLX = 5.0 mm
+d:Ge/4_0/HLY = 1.27 mm
+d:Ge/4_0/HLZ = 0.0254 mm
+d:Ge/4_0/TransY = 4.036200000000001 mm
+d:Ge/4_0/TransZ = 1.5094 mm
+
+# hole 4_1
+s:Ge/4_1/Type = "TsBox"
+s:Ge/4_1/Parent = "millichannel"
+s:Ge/4_1/Material = "G4_GLASS_LEAD"
+d:Ge/4_1/HLX = 5.0 mm
+d:Ge/4_1/HLY = 1.27 mm
+d:Ge/4_1/HLZ = 0.0254 mm
+d:Ge/4_1/TransY = 1.3438000000000008 mm
+d:Ge/4_1/TransZ = 1.5094 mm
+
+# hole 4_2
+s:Ge/4_2/Type = "TsBox"
+s:Ge/4_2/Parent = "millichannel"
+s:Ge/4_2/Material = "G4_GLASS_LEAD"
+d:Ge/4_2/HLX = 5.0 mm
+d:Ge/4_2/HLY = 1.27 mm
+d:Ge/4_2/HLZ = 0.0254 mm
+d:Ge/4_2/TransY = -1.3485999999999994 mm
+d:Ge/4_2/TransZ = 1.5094 mm
+
+# hole 4_3
+s:Ge/4_3/Type = "TsBox"
+s:Ge/4_3/Parent = "millichannel"
+s:Ge/4_3/Material = "G4_GLASS_LEAD"
+d:Ge/4_3/HLX = 5.0 mm
+d:Ge/4_3/HLY = 1.27 mm
+d:Ge/4_3/HLZ = 0.0254 mm
+d:Ge/4_3/TransY = -4.041 mm
+d:Ge/4_3/TransZ = 1.5094 mm
+
+# hole 5_0
+s:Ge/5_0/Type = "TsBox"
+s:Ge/5_0/Parent = "millichannel"
+s:Ge/5_0/Material = "G4_GLASS_LEAD"
+d:Ge/5_0/HLX = 5.0 mm
+d:Ge/5_0/HLY = 1.27 mm
+d:Ge/5_0/HLZ = 0.0254 mm
+d:Ge/5_0/TransY = 4.036200000000001 mm
+d:Ge/5_0/TransZ = 1.3062 mm
+
+# hole 5_1
+s:Ge/5_1/Type = "TsBox"
+s:Ge/5_1/Parent = "millichannel"
+s:Ge/5_1/Material = "G4_GLASS_LEAD"
+d:Ge/5_1/HLX = 5.0 mm
+d:Ge/5_1/HLY = 1.27 mm
+d:Ge/5_1/HLZ = 0.0254 mm
+d:Ge/5_1/TransY = 1.3438000000000008 mm
+d:Ge/5_1/TransZ = 1.3062 mm
+
+# hole 5_2
+s:Ge/5_2/Type = "TsBox"
+s:Ge/5_2/Parent = "millichannel"
+s:Ge/5_2/Material = "G4_GLASS_LEAD"
+d:Ge/5_2/HLX = 5.0 mm
+d:Ge/5_2/HLY = 1.27 mm
+d:Ge/5_2/HLZ = 0.0254 mm
+d:Ge/5_2/TransY = -1.3485999999999994 mm
+d:Ge/5_2/TransZ = 1.3062 mm
+
+# hole 5_3
+s:Ge/5_3/Type = "TsBox"
+s:Ge/5_3/Parent = "millichannel"
+s:Ge/5_3/Material = "G4_GLASS_LEAD"
+d:Ge/5_3/HLX = 5.0 mm
+d:Ge/5_3/HLY = 1.27 mm
+d:Ge/5_3/HLZ = 0.0254 mm
+d:Ge/5_3/TransY = -4.041 mm
+d:Ge/5_3/TransZ = 1.3062 mm
+
+# hole 6_0
+s:Ge/6_0/Type = "TsBox"
+s:Ge/6_0/Parent = "millichannel"
+s:Ge/6_0/Material = "G4_GLASS_LEAD"
+d:Ge/6_0/HLX = 5.0 mm
+d:Ge/6_0/HLY = 1.27 mm
+d:Ge/6_0/HLZ = 0.0254 mm
+d:Ge/6_0/TransY = 4.036200000000001 mm
+d:Ge/6_0/TransZ = 1.1030000000000002 mm
+
+# hole 6_1
+s:Ge/6_1/Type = "TsBox"
+s:Ge/6_1/Parent = "millichannel"
+s:Ge/6_1/Material = "G4_GLASS_LEAD"
+d:Ge/6_1/HLX = 5.0 mm
+d:Ge/6_1/HLY = 1.27 mm
+d:Ge/6_1/HLZ = 0.0254 mm
+d:Ge/6_1/TransY = 1.3438000000000008 mm
+d:Ge/6_1/TransZ = 1.1030000000000002 mm
+
+# hole 6_2
+s:Ge/6_2/Type = "TsBox"
+s:Ge/6_2/Parent = "millichannel"
+s:Ge/6_2/Material = "G4_GLASS_LEAD"
+d:Ge/6_2/HLX = 5.0 mm
+d:Ge/6_2/HLY = 1.27 mm
+d:Ge/6_2/HLZ = 0.0254 mm
+d:Ge/6_2/TransY = -1.3485999999999994 mm
+d:Ge/6_2/TransZ = 1.1030000000000002 mm
+
+# hole 6_3
+s:Ge/6_3/Type = "TsBox"
+s:Ge/6_3/Parent = "millichannel"
+s:Ge/6_3/Material = "G4_GLASS_LEAD"
+d:Ge/6_3/HLX = 5.0 mm
+d:Ge/6_3/HLY = 1.27 mm
+d:Ge/6_3/HLZ = 0.0254 mm
+d:Ge/6_3/TransY = -4.041 mm
+d:Ge/6_3/TransZ = 1.1030000000000002 mm
+
+# hole 7_0
+s:Ge/7_0/Type = "TsBox"
+s:Ge/7_0/Parent = "millichannel"
+s:Ge/7_0/Material = "G4_GLASS_LEAD"
+d:Ge/7_0/HLX = 5.0 mm
+d:Ge/7_0/HLY = 1.27 mm
+d:Ge/7_0/HLZ = 0.0254 mm
+d:Ge/7_0/TransY = 4.036200000000001 mm
+d:Ge/7_0/TransZ = 0.8998000000000002 mm
+
+# hole 7_1
+s:Ge/7_1/Type = "TsBox"
+s:Ge/7_1/Parent = "millichannel"
+s:Ge/7_1/Material = "G4_GLASS_LEAD"
+d:Ge/7_1/HLX = 5.0 mm
+d:Ge/7_1/HLY = 1.27 mm
+d:Ge/7_1/HLZ = 0.0254 mm
+d:Ge/7_1/TransY = 1.3438000000000008 mm
+d:Ge/7_1/TransZ = 0.8998000000000002 mm
+
+# hole 7_2
+s:Ge/7_2/Type = "TsBox"
+s:Ge/7_2/Parent = "millichannel"
+s:Ge/7_2/Material = "G4_GLASS_LEAD"
+d:Ge/7_2/HLX = 5.0 mm
+d:Ge/7_2/HLY = 1.27 mm
+d:Ge/7_2/HLZ = 0.0254 mm
+d:Ge/7_2/TransY = -1.3485999999999994 mm
+d:Ge/7_2/TransZ = 0.8998000000000002 mm
+
+# hole 7_3
+s:Ge/7_3/Type = "TsBox"
+s:Ge/7_3/Parent = "millichannel"
+s:Ge/7_3/Material = "G4_GLASS_LEAD"
+d:Ge/7_3/HLX = 5.0 mm
+d:Ge/7_3/HLY = 1.27 mm
+d:Ge/7_3/HLZ = 0.0254 mm
+d:Ge/7_3/TransY = -4.041 mm
+d:Ge/7_3/TransZ = 0.8998000000000002 mm
+
+# hole 8_0
+s:Ge/8_0/Type = "TsBox"
+s:Ge/8_0/Parent = "millichannel"
+s:Ge/8_0/Material = "G4_GLASS_LEAD"
+d:Ge/8_0/HLX = 5.0 mm
+d:Ge/8_0/HLY = 1.27 mm
+d:Ge/8_0/HLZ = 0.0254 mm
+d:Ge/8_0/TransY = 4.036200000000001 mm
+d:Ge/8_0/TransZ = 0.6966000000000001 mm
+
+# hole 8_1
+s:Ge/8_1/Type = "TsBox"
+s:Ge/8_1/Parent = "millichannel"
+s:Ge/8_1/Material = "G4_GLASS_LEAD"
+d:Ge/8_1/HLX = 5.0 mm
+d:Ge/8_1/HLY = 1.27 mm
+d:Ge/8_1/HLZ = 0.0254 mm
+d:Ge/8_1/TransY = 1.3438000000000008 mm
+d:Ge/8_1/TransZ = 0.6966000000000001 mm
+
+# hole 8_2
+s:Ge/8_2/Type = "TsBox"
+s:Ge/8_2/Parent = "millichannel"
+s:Ge/8_2/Material = "G4_GLASS_LEAD"
+d:Ge/8_2/HLX = 5.0 mm
+d:Ge/8_2/HLY = 1.27 mm
+d:Ge/8_2/HLZ = 0.0254 mm
+d:Ge/8_2/TransY = -1.3485999999999994 mm
+d:Ge/8_2/TransZ = 0.6966000000000001 mm
+
+# hole 8_3
+s:Ge/8_3/Type = "TsBox"
+s:Ge/8_3/Parent = "millichannel"
+s:Ge/8_3/Material = "G4_GLASS_LEAD"
+d:Ge/8_3/HLX = 5.0 mm
+d:Ge/8_3/HLY = 1.27 mm
+d:Ge/8_3/HLZ = 0.0254 mm
+d:Ge/8_3/TransY = -4.041 mm
+d:Ge/8_3/TransZ = 0.6966000000000001 mm
+
+# hole 9_0
+s:Ge/9_0/Type = "TsBox"
+s:Ge/9_0/Parent = "millichannel"
+s:Ge/9_0/Material = "G4_GLASS_LEAD"
+d:Ge/9_0/HLX = 5.0 mm
+d:Ge/9_0/HLY = 1.27 mm
+d:Ge/9_0/HLZ = 0.0254 mm
+d:Ge/9_0/TransY = 4.036200000000001 mm
+d:Ge/9_0/TransZ = 0.49340000000000006 mm
+
+# hole 9_1
+s:Ge/9_1/Type = "TsBox"
+s:Ge/9_1/Parent = "millichannel"
+s:Ge/9_1/Material = "G4_GLASS_LEAD"
+d:Ge/9_1/HLX = 5.0 mm
+d:Ge/9_1/HLY = 1.27 mm
+d:Ge/9_1/HLZ = 0.0254 mm
+d:Ge/9_1/TransY = 1.3438000000000008 mm
+d:Ge/9_1/TransZ = 0.49340000000000006 mm
+
+# hole 9_2
+s:Ge/9_2/Type = "TsBox"
+s:Ge/9_2/Parent = "millichannel"
+s:Ge/9_2/Material = "G4_GLASS_LEAD"
+d:Ge/9_2/HLX = 5.0 mm
+d:Ge/9_2/HLY = 1.27 mm
+d:Ge/9_2/HLZ = 0.0254 mm
+d:Ge/9_2/TransY = -1.3485999999999994 mm
+d:Ge/9_2/TransZ = 0.49340000000000006 mm
+
+# hole 9_3
+s:Ge/9_3/Type = "TsBox"
+s:Ge/9_3/Parent = "millichannel"
+s:Ge/9_3/Material = "G4_GLASS_LEAD"
+d:Ge/9_3/HLX = 5.0 mm
+d:Ge/9_3/HLY = 1.27 mm
+d:Ge/9_3/HLZ = 0.0254 mm
+d:Ge/9_3/TransY = -4.041 mm
+d:Ge/9_3/TransZ = 0.49340000000000006 mm
+
+# hole 10_0
+s:Ge/10_0/Type = "TsBox"
+s:Ge/10_0/Parent = "millichannel"
+s:Ge/10_0/Material = "G4_GLASS_LEAD"
+d:Ge/10_0/HLX = 5.0 mm
+d:Ge/10_0/HLY = 1.27 mm
+d:Ge/10_0/HLZ = 0.0254 mm
+d:Ge/10_0/TransY = 4.036200000000001 mm
+d:Ge/10_0/TransZ = 0.2902 mm
+
+# hole 10_1
+s:Ge/10_1/Type = "TsBox"
+s:Ge/10_1/Parent = "millichannel"
+s:Ge/10_1/Material = "G4_GLASS_LEAD"
+d:Ge/10_1/HLX = 5.0 mm
+d:Ge/10_1/HLY = 1.27 mm
+d:Ge/10_1/HLZ = 0.0254 mm
+d:Ge/10_1/TransY = 1.3438000000000008 mm
+d:Ge/10_1/TransZ = 0.2902 mm
+
+# hole 10_2
+s:Ge/10_2/Type = "TsBox"
+s:Ge/10_2/Parent = "millichannel"
+s:Ge/10_2/Material = "G4_GLASS_LEAD"
+d:Ge/10_2/HLX = 5.0 mm
+d:Ge/10_2/HLY = 1.27 mm
+d:Ge/10_2/HLZ = 0.0254 mm
+d:Ge/10_2/TransY = -1.3485999999999994 mm
+d:Ge/10_2/TransZ = 0.2902 mm
+
+# hole 10_3
+s:Ge/10_3/Type = "TsBox"
+s:Ge/10_3/Parent = "millichannel"
+s:Ge/10_3/Material = "G4_GLASS_LEAD"
+d:Ge/10_3/HLX = 5.0 mm
+d:Ge/10_3/HLY = 1.27 mm
+d:Ge/10_3/HLZ = 0.0254 mm
+d:Ge/10_3/TransY = -4.041 mm
+d:Ge/10_3/TransZ = 0.2902 mm
+
+# hole 11_0
+s:Ge/11_0/Type = "TsBox"
+s:Ge/11_0/Parent = "millichannel"
+s:Ge/11_0/Material = "G4_GLASS_LEAD"
+d:Ge/11_0/HLX = 5.0 mm
+d:Ge/11_0/HLY = 1.27 mm
+d:Ge/11_0/HLZ = 0.0254 mm
+d:Ge/11_0/TransY = 4.036200000000001 mm
+d:Ge/11_0/TransZ = 0.08700000000000019 mm
+
+# hole 11_1
+s:Ge/11_1/Type = "TsBox"
+s:Ge/11_1/Parent = "millichannel"
+s:Ge/11_1/Material = "G4_GLASS_LEAD"
+d:Ge/11_1/HLX = 5.0 mm
+d:Ge/11_1/HLY = 1.27 mm
+d:Ge/11_1/HLZ = 0.0254 mm
+d:Ge/11_1/TransY = 1.3438000000000008 mm
+d:Ge/11_1/TransZ = 0.08700000000000019 mm
+
+# hole 11_2
+s:Ge/11_2/Type = "TsBox"
+s:Ge/11_2/Parent = "millichannel"
+s:Ge/11_2/Material = "G4_GLASS_LEAD"
+d:Ge/11_2/HLX = 5.0 mm
+d:Ge/11_2/HLY = 1.27 mm
+d:Ge/11_2/HLZ = 0.0254 mm
+d:Ge/11_2/TransY = -1.3485999999999994 mm
+d:Ge/11_2/TransZ = 0.08700000000000019 mm
+
+# hole 11_3
+s:Ge/11_3/Type = "TsBox"
+s:Ge/11_3/Parent = "millichannel"
+s:Ge/11_3/Material = "G4_GLASS_LEAD"
+d:Ge/11_3/HLX = 5.0 mm
+d:Ge/11_3/HLY = 1.27 mm
+d:Ge/11_3/HLZ = 0.0254 mm
+d:Ge/11_3/TransY = -4.041 mm
+d:Ge/11_3/TransZ = 0.08700000000000019 mm
+
+# hole 12_0
+s:Ge/12_0/Type = "TsBox"
+s:Ge/12_0/Parent = "millichannel"
+s:Ge/12_0/Material = "G4_GLASS_LEAD"
+d:Ge/12_0/HLX = 5.0 mm
+d:Ge/12_0/HLY = 1.27 mm
+d:Ge/12_0/HLZ = 0.0254 mm
+d:Ge/12_0/TransY = 4.036200000000001 mm
+d:Ge/12_0/TransZ = -0.11619999999999964 mm
+
+# hole 12_1
+s:Ge/12_1/Type = "TsBox"
+s:Ge/12_1/Parent = "millichannel"
+s:Ge/12_1/Material = "G4_GLASS_LEAD"
+d:Ge/12_1/HLX = 5.0 mm
+d:Ge/12_1/HLY = 1.27 mm
+d:Ge/12_1/HLZ = 0.0254 mm
+d:Ge/12_1/TransY = 1.3438000000000008 mm
+d:Ge/12_1/TransZ = -0.11619999999999964 mm
+
+# hole 12_2
+s:Ge/12_2/Type = "TsBox"
+s:Ge/12_2/Parent = "millichannel"
+s:Ge/12_2/Material = "G4_GLASS_LEAD"
+d:Ge/12_2/HLX = 5.0 mm
+d:Ge/12_2/HLY = 1.27 mm
+d:Ge/12_2/HLZ = 0.0254 mm
+d:Ge/12_2/TransY = -1.3485999999999994 mm
+d:Ge/12_2/TransZ = -0.11619999999999964 mm
+
+# hole 12_3
+s:Ge/12_3/Type = "TsBox"
+s:Ge/12_3/Parent = "millichannel"
+s:Ge/12_3/Material = "G4_GLASS_LEAD"
+d:Ge/12_3/HLX = 5.0 mm
+d:Ge/12_3/HLY = 1.27 mm
+d:Ge/12_3/HLZ = 0.0254 mm
+d:Ge/12_3/TransY = -4.041 mm
+d:Ge/12_3/TransZ = -0.11619999999999964 mm
+
+# hole 13_0
+s:Ge/13_0/Type = "TsBox"
+s:Ge/13_0/Parent = "millichannel"
+s:Ge/13_0/Material = "G4_GLASS_LEAD"
+d:Ge/13_0/HLX = 5.0 mm
+d:Ge/13_0/HLY = 1.27 mm
+d:Ge/13_0/HLZ = 0.0254 mm
+d:Ge/13_0/TransY = 4.036200000000001 mm
+d:Ge/13_0/TransZ = -0.3193999999999999 mm
+
+# hole 13_1
+s:Ge/13_1/Type = "TsBox"
+s:Ge/13_1/Parent = "millichannel"
+s:Ge/13_1/Material = "G4_GLASS_LEAD"
+d:Ge/13_1/HLX = 5.0 mm
+d:Ge/13_1/HLY = 1.27 mm
+d:Ge/13_1/HLZ = 0.0254 mm
+d:Ge/13_1/TransY = 1.3438000000000008 mm
+d:Ge/13_1/TransZ = -0.3193999999999999 mm
+
+# hole 13_2
+s:Ge/13_2/Type = "TsBox"
+s:Ge/13_2/Parent = "millichannel"
+s:Ge/13_2/Material = "G4_GLASS_LEAD"
+d:Ge/13_2/HLX = 5.0 mm
+d:Ge/13_2/HLY = 1.27 mm
+d:Ge/13_2/HLZ = 0.0254 mm
+d:Ge/13_2/TransY = -1.3485999999999994 mm
+d:Ge/13_2/TransZ = -0.3193999999999999 mm
+
+# hole 13_3
+s:Ge/13_3/Type = "TsBox"
+s:Ge/13_3/Parent = "millichannel"
+s:Ge/13_3/Material = "G4_GLASS_LEAD"
+d:Ge/13_3/HLX = 5.0 mm
+d:Ge/13_3/HLY = 1.27 mm
+d:Ge/13_3/HLZ = 0.0254 mm
+d:Ge/13_3/TransY = -4.041 mm
+d:Ge/13_3/TransZ = -0.3193999999999999 mm
+
+# hole 14_0
+s:Ge/14_0/Type = "TsBox"
+s:Ge/14_0/Parent = "millichannel"
+s:Ge/14_0/Material = "G4_GLASS_LEAD"
+d:Ge/14_0/HLX = 5.0 mm
+d:Ge/14_0/HLY = 1.27 mm
+d:Ge/14_0/HLZ = 0.0254 mm
+d:Ge/14_0/TransY = 4.036200000000001 mm
+d:Ge/14_0/TransZ = -0.5225999999999997 mm
+
+# hole 14_1
+s:Ge/14_1/Type = "TsBox"
+s:Ge/14_1/Parent = "millichannel"
+s:Ge/14_1/Material = "G4_GLASS_LEAD"
+d:Ge/14_1/HLX = 5.0 mm
+d:Ge/14_1/HLY = 1.27 mm
+d:Ge/14_1/HLZ = 0.0254 mm
+d:Ge/14_1/TransY = 1.3438000000000008 mm
+d:Ge/14_1/TransZ = -0.5225999999999997 mm
+
+# hole 14_2
+s:Ge/14_2/Type = "TsBox"
+s:Ge/14_2/Parent = "millichannel"
+s:Ge/14_2/Material = "G4_GLASS_LEAD"
+d:Ge/14_2/HLX = 5.0 mm
+d:Ge/14_2/HLY = 1.27 mm
+d:Ge/14_2/HLZ = 0.0254 mm
+d:Ge/14_2/TransY = -1.3485999999999994 mm
+d:Ge/14_2/TransZ = -0.5225999999999997 mm
+
+# hole 14_3
+s:Ge/14_3/Type = "TsBox"
+s:Ge/14_3/Parent = "millichannel"
+s:Ge/14_3/Material = "G4_GLASS_LEAD"
+d:Ge/14_3/HLX = 5.0 mm
+d:Ge/14_3/HLY = 1.27 mm
+d:Ge/14_3/HLZ = 0.0254 mm
+d:Ge/14_3/TransY = -4.041 mm
+d:Ge/14_3/TransZ = -0.5225999999999997 mm
+
+# hole 15_0
+s:Ge/15_0/Type = "TsBox"
+s:Ge/15_0/Parent = "millichannel"
+s:Ge/15_0/Material = "G4_GLASS_LEAD"
+d:Ge/15_0/HLX = 5.0 mm
+d:Ge/15_0/HLY = 1.27 mm
+d:Ge/15_0/HLZ = 0.0254 mm
+d:Ge/15_0/TransY = 4.036200000000001 mm
+d:Ge/15_0/TransZ = -0.7258 mm
+
+# hole 15_1
+s:Ge/15_1/Type = "TsBox"
+s:Ge/15_1/Parent = "millichannel"
+s:Ge/15_1/Material = "G4_GLASS_LEAD"
+d:Ge/15_1/HLX = 5.0 mm
+d:Ge/15_1/HLY = 1.27 mm
+d:Ge/15_1/HLZ = 0.0254 mm
+d:Ge/15_1/TransY = 1.3438000000000008 mm
+d:Ge/15_1/TransZ = -0.7258 mm
+
+# hole 15_2
+s:Ge/15_2/Type = "TsBox"
+s:Ge/15_2/Parent = "millichannel"
+s:Ge/15_2/Material = "G4_GLASS_LEAD"
+d:Ge/15_2/HLX = 5.0 mm
+d:Ge/15_2/HLY = 1.27 mm
+d:Ge/15_2/HLZ = 0.0254 mm
+d:Ge/15_2/TransY = -1.3485999999999994 mm
+d:Ge/15_2/TransZ = -0.7258 mm
+
+# hole 15_3
+s:Ge/15_3/Type = "TsBox"
+s:Ge/15_3/Parent = "millichannel"
+s:Ge/15_3/Material = "G4_GLASS_LEAD"
+d:Ge/15_3/HLX = 5.0 mm
+d:Ge/15_3/HLY = 1.27 mm
+d:Ge/15_3/HLZ = 0.0254 mm
+d:Ge/15_3/TransY = -4.041 mm
+d:Ge/15_3/TransZ = -0.7258 mm
+
+# hole 16_0
+s:Ge/16_0/Type = "TsBox"
+s:Ge/16_0/Parent = "millichannel"
+s:Ge/16_0/Material = "G4_GLASS_LEAD"
+d:Ge/16_0/HLX = 5.0 mm
+d:Ge/16_0/HLY = 1.27 mm
+d:Ge/16_0/HLZ = 0.0254 mm
+d:Ge/16_0/TransY = 4.036200000000001 mm
+d:Ge/16_0/TransZ = -0.9289999999999998 mm
+
+# hole 16_1
+s:Ge/16_1/Type = "TsBox"
+s:Ge/16_1/Parent = "millichannel"
+s:Ge/16_1/Material = "G4_GLASS_LEAD"
+d:Ge/16_1/HLX = 5.0 mm
+d:Ge/16_1/HLY = 1.27 mm
+d:Ge/16_1/HLZ = 0.0254 mm
+d:Ge/16_1/TransY = 1.3438000000000008 mm
+d:Ge/16_1/TransZ = -0.9289999999999998 mm
+
+# hole 16_2
+s:Ge/16_2/Type = "TsBox"
+s:Ge/16_2/Parent = "millichannel"
+s:Ge/16_2/Material = "G4_GLASS_LEAD"
+d:Ge/16_2/HLX = 5.0 mm
+d:Ge/16_2/HLY = 1.27 mm
+d:Ge/16_2/HLZ = 0.0254 mm
+d:Ge/16_2/TransY = -1.3485999999999994 mm
+d:Ge/16_2/TransZ = -0.9289999999999998 mm
+
+# hole 16_3
+s:Ge/16_3/Type = "TsBox"
+s:Ge/16_3/Parent = "millichannel"
+s:Ge/16_3/Material = "G4_GLASS_LEAD"
+d:Ge/16_3/HLX = 5.0 mm
+d:Ge/16_3/HLY = 1.27 mm
+d:Ge/16_3/HLZ = 0.0254 mm
+d:Ge/16_3/TransY = -4.041 mm
+d:Ge/16_3/TransZ = -0.9289999999999998 mm
+
+# hole 17_0
+s:Ge/17_0/Type = "TsBox"
+s:Ge/17_0/Parent = "millichannel"
+s:Ge/17_0/Material = "G4_GLASS_LEAD"
+d:Ge/17_0/HLX = 5.0 mm
+d:Ge/17_0/HLY = 1.27 mm
+d:Ge/17_0/HLZ = 0.0254 mm
+d:Ge/17_0/TransY = 4.036200000000001 mm
+d:Ge/17_0/TransZ = -1.1321999999999997 mm
+
+# hole 17_1
+s:Ge/17_1/Type = "TsBox"
+s:Ge/17_1/Parent = "millichannel"
+s:Ge/17_1/Material = "G4_GLASS_LEAD"
+d:Ge/17_1/HLX = 5.0 mm
+d:Ge/17_1/HLY = 1.27 mm
+d:Ge/17_1/HLZ = 0.0254 mm
+d:Ge/17_1/TransY = 1.3438000000000008 mm
+d:Ge/17_1/TransZ = -1.1321999999999997 mm
+
+# hole 17_2
+s:Ge/17_2/Type = "TsBox"
+s:Ge/17_2/Parent = "millichannel"
+s:Ge/17_2/Material = "G4_GLASS_LEAD"
+d:Ge/17_2/HLX = 5.0 mm
+d:Ge/17_2/HLY = 1.27 mm
+d:Ge/17_2/HLZ = 0.0254 mm
+d:Ge/17_2/TransY = -1.3485999999999994 mm
+d:Ge/17_2/TransZ = -1.1321999999999997 mm
+
+# hole 17_3
+s:Ge/17_3/Type = "TsBox"
+s:Ge/17_3/Parent = "millichannel"
+s:Ge/17_3/Material = "G4_GLASS_LEAD"
+d:Ge/17_3/HLX = 5.0 mm
+d:Ge/17_3/HLY = 1.27 mm
+d:Ge/17_3/HLZ = 0.0254 mm
+d:Ge/17_3/TransY = -4.041 mm
+d:Ge/17_3/TransZ = -1.1321999999999997 mm
+
+# hole 18_0
+s:Ge/18_0/Type = "TsBox"
+s:Ge/18_0/Parent = "millichannel"
+s:Ge/18_0/Material = "G4_GLASS_LEAD"
+d:Ge/18_0/HLX = 5.0 mm
+d:Ge/18_0/HLY = 1.27 mm
+d:Ge/18_0/HLZ = 0.0254 mm
+d:Ge/18_0/TransY = 4.036200000000001 mm
+d:Ge/18_0/TransZ = -1.3354 mm
+
+# hole 18_1
+s:Ge/18_1/Type = "TsBox"
+s:Ge/18_1/Parent = "millichannel"
+s:Ge/18_1/Material = "G4_GLASS_LEAD"
+d:Ge/18_1/HLX = 5.0 mm
+d:Ge/18_1/HLY = 1.27 mm
+d:Ge/18_1/HLZ = 0.0254 mm
+d:Ge/18_1/TransY = 1.3438000000000008 mm
+d:Ge/18_1/TransZ = -1.3354 mm
+
+# hole 18_2
+s:Ge/18_2/Type = "TsBox"
+s:Ge/18_2/Parent = "millichannel"
+s:Ge/18_2/Material = "G4_GLASS_LEAD"
+d:Ge/18_2/HLX = 5.0 mm
+d:Ge/18_2/HLY = 1.27 mm
+d:Ge/18_2/HLZ = 0.0254 mm
+d:Ge/18_2/TransY = -1.3485999999999994 mm
+d:Ge/18_2/TransZ = -1.3354 mm
+
+# hole 18_3
+s:Ge/18_3/Type = "TsBox"
+s:Ge/18_3/Parent = "millichannel"
+s:Ge/18_3/Material = "G4_GLASS_LEAD"
+d:Ge/18_3/HLX = 5.0 mm
+d:Ge/18_3/HLY = 1.27 mm
+d:Ge/18_3/HLZ = 0.0254 mm
+d:Ge/18_3/TransY = -4.041 mm
+d:Ge/18_3/TransZ = -1.3354 mm
+
+# hole 19_0
+s:Ge/19_0/Type = "TsBox"
+s:Ge/19_0/Parent = "millichannel"
+s:Ge/19_0/Material = "G4_GLASS_LEAD"
+d:Ge/19_0/HLX = 5.0 mm
+d:Ge/19_0/HLY = 1.27 mm
+d:Ge/19_0/HLZ = 0.0254 mm
+d:Ge/19_0/TransY = 4.036200000000001 mm
+d:Ge/19_0/TransZ = -1.5385999999999997 mm
+
+# hole 19_1
+s:Ge/19_1/Type = "TsBox"
+s:Ge/19_1/Parent = "millichannel"
+s:Ge/19_1/Material = "G4_GLASS_LEAD"
+d:Ge/19_1/HLX = 5.0 mm
+d:Ge/19_1/HLY = 1.27 mm
+d:Ge/19_1/HLZ = 0.0254 mm
+d:Ge/19_1/TransY = 1.3438000000000008 mm
+d:Ge/19_1/TransZ = -1.5385999999999997 mm
+
+# hole 19_2
+s:Ge/19_2/Type = "TsBox"
+s:Ge/19_2/Parent = "millichannel"
+s:Ge/19_2/Material = "G4_GLASS_LEAD"
+d:Ge/19_2/HLX = 5.0 mm
+d:Ge/19_2/HLY = 1.27 mm
+d:Ge/19_2/HLZ = 0.0254 mm
+d:Ge/19_2/TransY = -1.3485999999999994 mm
+d:Ge/19_2/TransZ = -1.5385999999999997 mm
+
+# hole 19_3
+s:Ge/19_3/Type = "TsBox"
+s:Ge/19_3/Parent = "millichannel"
+s:Ge/19_3/Material = "G4_GLASS_LEAD"
+d:Ge/19_3/HLX = 5.0 mm
+d:Ge/19_3/HLY = 1.27 mm
+d:Ge/19_3/HLZ = 0.0254 mm
+d:Ge/19_3/TransY = -4.041 mm
+d:Ge/19_3/TransZ = -1.5385999999999997 mm
+
+# hole 20_0
+s:Ge/20_0/Type = "TsBox"
+s:Ge/20_0/Parent = "millichannel"
+s:Ge/20_0/Material = "G4_GLASS_LEAD"
+d:Ge/20_0/HLX = 5.0 mm
+d:Ge/20_0/HLY = 1.27 mm
+d:Ge/20_0/HLZ = 0.0254 mm
+d:Ge/20_0/TransY = 4.036200000000001 mm
+d:Ge/20_0/TransZ = -1.7418 mm
+
+# hole 20_1
+s:Ge/20_1/Type = "TsBox"
+s:Ge/20_1/Parent = "millichannel"
+s:Ge/20_1/Material = "G4_GLASS_LEAD"
+d:Ge/20_1/HLX = 5.0 mm
+d:Ge/20_1/HLY = 1.27 mm
+d:Ge/20_1/HLZ = 0.0254 mm
+d:Ge/20_1/TransY = 1.3438000000000008 mm
+d:Ge/20_1/TransZ = -1.7418 mm
+
+# hole 20_2
+s:Ge/20_2/Type = "TsBox"
+s:Ge/20_2/Parent = "millichannel"
+s:Ge/20_2/Material = "G4_GLASS_LEAD"
+d:Ge/20_2/HLX = 5.0 mm
+d:Ge/20_2/HLY = 1.27 mm
+d:Ge/20_2/HLZ = 0.0254 mm
+d:Ge/20_2/TransY = -1.3485999999999994 mm
+d:Ge/20_2/TransZ = -1.7418 mm
+
+# hole 20_3
+s:Ge/20_3/Type = "TsBox"
+s:Ge/20_3/Parent = "millichannel"
+s:Ge/20_3/Material = "G4_GLASS_LEAD"
+d:Ge/20_3/HLX = 5.0 mm
+d:Ge/20_3/HLY = 1.27 mm
+d:Ge/20_3/HLZ = 0.0254 mm
+d:Ge/20_3/TransY = -4.041 mm
+d:Ge/20_3/TransZ = -1.7418 mm
+
+# hole 21_0
+s:Ge/21_0/Type = "TsBox"
+s:Ge/21_0/Parent = "millichannel"
+s:Ge/21_0/Material = "G4_GLASS_LEAD"
+d:Ge/21_0/HLX = 5.0 mm
+d:Ge/21_0/HLY = 1.27 mm
+d:Ge/21_0/HLZ = 0.0254 mm
+d:Ge/21_0/TransY = 4.036200000000001 mm
+d:Ge/21_0/TransZ = -1.9449999999999998 mm
+
+# hole 21_1
+s:Ge/21_1/Type = "TsBox"
+s:Ge/21_1/Parent = "millichannel"
+s:Ge/21_1/Material = "G4_GLASS_LEAD"
+d:Ge/21_1/HLX = 5.0 mm
+d:Ge/21_1/HLY = 1.27 mm
+d:Ge/21_1/HLZ = 0.0254 mm
+d:Ge/21_1/TransY = 1.3438000000000008 mm
+d:Ge/21_1/TransZ = -1.9449999999999998 mm
+
+# hole 21_2
+s:Ge/21_2/Type = "TsBox"
+s:Ge/21_2/Parent = "millichannel"
+s:Ge/21_2/Material = "G4_GLASS_LEAD"
+d:Ge/21_2/HLX = 5.0 mm
+d:Ge/21_2/HLY = 1.27 mm
+d:Ge/21_2/HLZ = 0.0254 mm
+d:Ge/21_2/TransY = -1.3485999999999994 mm
+d:Ge/21_2/TransZ = -1.9449999999999998 mm
+
+# hole 21_3
+s:Ge/21_3/Type = "TsBox"
+s:Ge/21_3/Parent = "millichannel"
+s:Ge/21_3/Material = "G4_GLASS_LEAD"
+d:Ge/21_3/HLX = 5.0 mm
+d:Ge/21_3/HLY = 1.27 mm
+d:Ge/21_3/HLZ = 0.0254 mm
+d:Ge/21_3/TransY = -4.041 mm
+d:Ge/21_3/TransZ = -1.9449999999999998 mm
+
+# hole 22_0
+s:Ge/22_0/Type = "TsBox"
+s:Ge/22_0/Parent = "millichannel"
+s:Ge/22_0/Material = "G4_GLASS_LEAD"
+d:Ge/22_0/HLX = 5.0 mm
+d:Ge/22_0/HLY = 1.27 mm
+d:Ge/22_0/HLZ = 0.0254 mm
+d:Ge/22_0/TransY = 4.036200000000001 mm
+d:Ge/22_0/TransZ = -2.1481999999999997 mm
+
+# hole 22_1
+s:Ge/22_1/Type = "TsBox"
+s:Ge/22_1/Parent = "millichannel"
+s:Ge/22_1/Material = "G4_GLASS_LEAD"
+d:Ge/22_1/HLX = 5.0 mm
+d:Ge/22_1/HLY = 1.27 mm
+d:Ge/22_1/HLZ = 0.0254 mm
+d:Ge/22_1/TransY = 1.3438000000000008 mm
+d:Ge/22_1/TransZ = -2.1481999999999997 mm
+
+# hole 22_2
+s:Ge/22_2/Type = "TsBox"
+s:Ge/22_2/Parent = "millichannel"
+s:Ge/22_2/Material = "G4_GLASS_LEAD"
+d:Ge/22_2/HLX = 5.0 mm
+d:Ge/22_2/HLY = 1.27 mm
+d:Ge/22_2/HLZ = 0.0254 mm
+d:Ge/22_2/TransY = -1.3485999999999994 mm
+d:Ge/22_2/TransZ = -2.1481999999999997 mm
+
+# hole 22_3
+s:Ge/22_3/Type = "TsBox"
+s:Ge/22_3/Parent = "millichannel"
+s:Ge/22_3/Material = "G4_GLASS_LEAD"
+d:Ge/22_3/HLX = 5.0 mm
+d:Ge/22_3/HLY = 1.27 mm
+d:Ge/22_3/HLZ = 0.0254 mm
+d:Ge/22_3/TransY = -4.041 mm
+d:Ge/22_3/TransZ = -2.1481999999999997 mm
+

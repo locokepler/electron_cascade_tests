@@ -1,0 +1,533 @@
+# A TOPAS file containing the ribbon based HGM.
+# Built at angle 79.8 deg
+ # the box holding the HGM (made of vacuum)
+s:Ge/HGM/Type      = "TsBox"
+s:Ge/HGM/Material  = "Vacuum"
+d:Ge/HGM/HLX       = 10.49195607969242 mm
+d:Ge/HGM/HLY       = 10.785423701597917 mm
+d:Ge/HGM/HLZ       = 50.0 mm
+
+# Add an electric field to the box to move secondaries
+s:Ge/HGM/Field = "UniformElectroMagnetic"
+u:Ge/HGM/ElectricFieldDirectionX    = -1.0
+u:Ge/HGM/ElectricFieldDirectionY    = 0.0
+u:Ge/HGM/ElectricFieldDirectionZ    = 0.0
+d:Ge/HGM/ElectricFieldStrength      = 500 V/mm
+u:Ge/HGM/MagneticFieldDirectionX    = 0.0
+u:Ge/HGM/MagneticFieldDirectionY    = 1.0
+u:Ge/HGM/MagneticFieldDirectionZ    = 0.0
+d:Ge/HGM/MagneticFieldStrength      = 0.0 tesla
+# phase space scorer for the whole HGM (for secondary electron emission)
+s:Sc/full_HGM/Quantity   	 = "PhaseSpace"
+s:Sc/full_HGM/Surface    	 = "HGM/AnySurface"
+s:Sc/full_HGM/OutputType 	 = "ASCII"
+b:Sc/full_HGM/IncludeTimeOfFlight	 = "True"
+s:Sc/full_HGM/IncludeEmptyHistories 	 = "InSequence"
+b:Sc/full_HGM/IncludeRunID       	 = "True"
+sv:Sc/full_HGM/OnlyIncludeParticlesCharged   	 = 1 "negative"
+s:Sc/full_HGM/IfOutputFileAlreadyExists   	 = "Overwrite"
+b:Sc/full_HGM/PropagateToChildren         	 = "true"
+
+# Parallel world plate for observing electrons crossing back of HGM
+s:Ge/BackPlate/Parent = "World"
+b:Ge/BackPlate/IsParallel = "True"
+s:Ge/BackPlate/Type = "TsBox"
+d:Ge/BackPlate/HLX = 0.01 mm
+d:Ge/BackPlate/HLY = 10.785423701597917 mm
+d:Ge/BackPlate/HLZ = 50.0 mm
+d:Ge/BackPlate/transx = 9.49195607969242 mm
+
+s:Sc/backplane/Quantity = "Phasespace"
+s:Sc/backplane/Surface = "BackPlate/XPlusSurface"
+s:Sc/backplane/OutputType = "ASCII"
+b:Sc/backplane/IncludeTimeOfFlight = "True"
+s:Sc/backplane/IncludeEmptyHistories = "InSequence"
+b:Sc/backplane/IncludeRunID = "True"
+sv:Sc/backplane/OnlyIncludeParticlesCharged = 1 "negative"
+s:Sc/backplane/IfOutputFileAlreadyExists = "Increment"
+b:Sc/backplane/PropagateToChildren = "false"
+
+
+# the planes of the structure
+
+
+# plane coating 0_0
+s:Ge/C_0_0/Type      	 = "TsBox"
+s:Ge/C_0_0/Parent    	 = "HGM"
+s:Ge/C_0_0/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_0/HLZ       	 = 50.0 mm
+d:Ge/C_0_0/HLX    	 = 0.075 mm
+d:Ge/C_0_0/HLY    	 = 5.0 mm
+d:Ge/C_0_0/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_0/TransY    	 = 9.75 mm
+d:Ge/C_0_0/TransZ    	 = 0.0 mm
+d:Ge/C_0_0/RotZ    	 = 79.8 deg
+
+# plane coating 0_1
+s:Ge/C_0_1/Type      	 = "TsBox"
+s:Ge/C_0_1/Parent    	 = "HGM"
+s:Ge/C_0_1/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_1/HLZ       	 = 50.0 mm
+d:Ge/C_0_1/HLX    	 = 0.075 mm
+d:Ge/C_0_1/HLY    	 = 5.0 mm
+d:Ge/C_0_1/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_1/TransY    	 = 8.75 mm
+d:Ge/C_0_1/TransZ    	 = 0.0 mm
+d:Ge/C_0_1/RotZ    	 = 79.8 deg
+
+# plane coating 0_2
+s:Ge/C_0_2/Type      	 = "TsBox"
+s:Ge/C_0_2/Parent    	 = "HGM"
+s:Ge/C_0_2/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_2/HLZ       	 = 50.0 mm
+d:Ge/C_0_2/HLX    	 = 0.075 mm
+d:Ge/C_0_2/HLY    	 = 5.0 mm
+d:Ge/C_0_2/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_2/TransY    	 = 7.75 mm
+d:Ge/C_0_2/TransZ    	 = 0.0 mm
+d:Ge/C_0_2/RotZ    	 = 79.8 deg
+
+# plane coating 0_3
+s:Ge/C_0_3/Type      	 = "TsBox"
+s:Ge/C_0_3/Parent    	 = "HGM"
+s:Ge/C_0_3/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_3/HLZ       	 = 50.0 mm
+d:Ge/C_0_3/HLX    	 = 0.075 mm
+d:Ge/C_0_3/HLY    	 = 5.0 mm
+d:Ge/C_0_3/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_3/TransY    	 = 6.75 mm
+d:Ge/C_0_3/TransZ    	 = 0.0 mm
+d:Ge/C_0_3/RotZ    	 = 79.8 deg
+
+# plane coating 0_4
+s:Ge/C_0_4/Type      	 = "TsBox"
+s:Ge/C_0_4/Parent    	 = "HGM"
+s:Ge/C_0_4/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_4/HLZ       	 = 50.0 mm
+d:Ge/C_0_4/HLX    	 = 0.075 mm
+d:Ge/C_0_4/HLY    	 = 5.0 mm
+d:Ge/C_0_4/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_4/TransY    	 = 5.75 mm
+d:Ge/C_0_4/TransZ    	 = 0.0 mm
+d:Ge/C_0_4/RotZ    	 = 79.8 deg
+
+# plane coating 0_5
+s:Ge/C_0_5/Type      	 = "TsBox"
+s:Ge/C_0_5/Parent    	 = "HGM"
+s:Ge/C_0_5/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_5/HLZ       	 = 50.0 mm
+d:Ge/C_0_5/HLX    	 = 0.075 mm
+d:Ge/C_0_5/HLY    	 = 5.0 mm
+d:Ge/C_0_5/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_5/TransY    	 = 4.75 mm
+d:Ge/C_0_5/TransZ    	 = 0.0 mm
+d:Ge/C_0_5/RotZ    	 = 79.8 deg
+
+# plane coating 0_6
+s:Ge/C_0_6/Type      	 = "TsBox"
+s:Ge/C_0_6/Parent    	 = "HGM"
+s:Ge/C_0_6/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_6/HLZ       	 = 50.0 mm
+d:Ge/C_0_6/HLX    	 = 0.075 mm
+d:Ge/C_0_6/HLY    	 = 5.0 mm
+d:Ge/C_0_6/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_6/TransY    	 = 3.75 mm
+d:Ge/C_0_6/TransZ    	 = 0.0 mm
+d:Ge/C_0_6/RotZ    	 = 79.8 deg
+
+# plane coating 0_7
+s:Ge/C_0_7/Type      	 = "TsBox"
+s:Ge/C_0_7/Parent    	 = "HGM"
+s:Ge/C_0_7/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_7/HLZ       	 = 50.0 mm
+d:Ge/C_0_7/HLX    	 = 0.075 mm
+d:Ge/C_0_7/HLY    	 = 5.0 mm
+d:Ge/C_0_7/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_7/TransY    	 = 2.75 mm
+d:Ge/C_0_7/TransZ    	 = 0.0 mm
+d:Ge/C_0_7/RotZ    	 = 79.8 deg
+
+# plane coating 0_8
+s:Ge/C_0_8/Type      	 = "TsBox"
+s:Ge/C_0_8/Parent    	 = "HGM"
+s:Ge/C_0_8/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_8/HLZ       	 = 50.0 mm
+d:Ge/C_0_8/HLX    	 = 0.075 mm
+d:Ge/C_0_8/HLY    	 = 5.0 mm
+d:Ge/C_0_8/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_8/TransY    	 = 1.75 mm
+d:Ge/C_0_8/TransZ    	 = 0.0 mm
+d:Ge/C_0_8/RotZ    	 = 79.8 deg
+
+# plane coating 0_9
+s:Ge/C_0_9/Type      	 = "TsBox"
+s:Ge/C_0_9/Parent    	 = "HGM"
+s:Ge/C_0_9/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_9/HLZ       	 = 50.0 mm
+d:Ge/C_0_9/HLX    	 = 0.075 mm
+d:Ge/C_0_9/HLY    	 = 5.0 mm
+d:Ge/C_0_9/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_9/TransY    	 = 0.75 mm
+d:Ge/C_0_9/TransZ    	 = 0.0 mm
+d:Ge/C_0_9/RotZ    	 = 79.8 deg
+
+# plane coating 0_10
+s:Ge/C_0_10/Type      	 = "TsBox"
+s:Ge/C_0_10/Parent    	 = "HGM"
+s:Ge/C_0_10/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_10/HLZ       	 = 50.0 mm
+d:Ge/C_0_10/HLX    	 = 0.075 mm
+d:Ge/C_0_10/HLY    	 = 5.0 mm
+d:Ge/C_0_10/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_10/TransY    	 = -0.25 mm
+d:Ge/C_0_10/TransZ    	 = 0.0 mm
+d:Ge/C_0_10/RotZ    	 = 79.8 deg
+
+# plane coating 0_11
+s:Ge/C_0_11/Type      	 = "TsBox"
+s:Ge/C_0_11/Parent    	 = "HGM"
+s:Ge/C_0_11/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_11/HLZ       	 = 50.0 mm
+d:Ge/C_0_11/HLX    	 = 0.075 mm
+d:Ge/C_0_11/HLY    	 = 5.0 mm
+d:Ge/C_0_11/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_11/TransY    	 = -1.25 mm
+d:Ge/C_0_11/TransZ    	 = 0.0 mm
+d:Ge/C_0_11/RotZ    	 = 79.8 deg
+
+# plane coating 0_12
+s:Ge/C_0_12/Type      	 = "TsBox"
+s:Ge/C_0_12/Parent    	 = "HGM"
+s:Ge/C_0_12/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_12/HLZ       	 = 50.0 mm
+d:Ge/C_0_12/HLX    	 = 0.075 mm
+d:Ge/C_0_12/HLY    	 = 5.0 mm
+d:Ge/C_0_12/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_12/TransY    	 = -2.25 mm
+d:Ge/C_0_12/TransZ    	 = 0.0 mm
+d:Ge/C_0_12/RotZ    	 = 79.8 deg
+
+# plane coating 0_13
+s:Ge/C_0_13/Type      	 = "TsBox"
+s:Ge/C_0_13/Parent    	 = "HGM"
+s:Ge/C_0_13/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_13/HLZ       	 = 50.0 mm
+d:Ge/C_0_13/HLX    	 = 0.075 mm
+d:Ge/C_0_13/HLY    	 = 5.0 mm
+d:Ge/C_0_13/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_13/TransY    	 = -3.25 mm
+d:Ge/C_0_13/TransZ    	 = 0.0 mm
+d:Ge/C_0_13/RotZ    	 = 79.8 deg
+
+# plane coating 0_14
+s:Ge/C_0_14/Type      	 = "TsBox"
+s:Ge/C_0_14/Parent    	 = "HGM"
+s:Ge/C_0_14/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_14/HLZ       	 = 50.0 mm
+d:Ge/C_0_14/HLX    	 = 0.075 mm
+d:Ge/C_0_14/HLY    	 = 5.0 mm
+d:Ge/C_0_14/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_14/TransY    	 = -4.25 mm
+d:Ge/C_0_14/TransZ    	 = 0.0 mm
+d:Ge/C_0_14/RotZ    	 = 79.8 deg
+
+# plane coating 0_15
+s:Ge/C_0_15/Type      	 = "TsBox"
+s:Ge/C_0_15/Parent    	 = "HGM"
+s:Ge/C_0_15/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_15/HLZ       	 = 50.0 mm
+d:Ge/C_0_15/HLX    	 = 0.075 mm
+d:Ge/C_0_15/HLY    	 = 5.0 mm
+d:Ge/C_0_15/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_15/TransY    	 = -5.25 mm
+d:Ge/C_0_15/TransZ    	 = 0.0 mm
+d:Ge/C_0_15/RotZ    	 = 79.8 deg
+
+# plane coating 0_16
+s:Ge/C_0_16/Type      	 = "TsBox"
+s:Ge/C_0_16/Parent    	 = "HGM"
+s:Ge/C_0_16/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_16/HLZ       	 = 50.0 mm
+d:Ge/C_0_16/HLX    	 = 0.075 mm
+d:Ge/C_0_16/HLY    	 = 5.0 mm
+d:Ge/C_0_16/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_16/TransY    	 = -6.25 mm
+d:Ge/C_0_16/TransZ    	 = 0.0 mm
+d:Ge/C_0_16/RotZ    	 = 79.8 deg
+
+# plane coating 0_17
+s:Ge/C_0_17/Type      	 = "TsBox"
+s:Ge/C_0_17/Parent    	 = "HGM"
+s:Ge/C_0_17/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_17/HLZ       	 = 50.0 mm
+d:Ge/C_0_17/HLX    	 = 0.075 mm
+d:Ge/C_0_17/HLY    	 = 5.0 mm
+d:Ge/C_0_17/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_17/TransY    	 = -7.25 mm
+d:Ge/C_0_17/TransZ    	 = 0.0 mm
+d:Ge/C_0_17/RotZ    	 = 79.8 deg
+
+# plane coating 0_18
+s:Ge/C_0_18/Type      	 = "TsBox"
+s:Ge/C_0_18/Parent    	 = "HGM"
+s:Ge/C_0_18/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_18/HLZ       	 = 50.0 mm
+d:Ge/C_0_18/HLX    	 = 0.075 mm
+d:Ge/C_0_18/HLY    	 = 5.0 mm
+d:Ge/C_0_18/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_18/TransY    	 = -8.25 mm
+d:Ge/C_0_18/TransZ    	 = 0.0 mm
+d:Ge/C_0_18/RotZ    	 = 79.8 deg
+
+# plane coating 0_19
+s:Ge/C_0_19/Type      	 = "TsBox"
+s:Ge/C_0_19/Parent    	 = "HGM"
+s:Ge/C_0_19/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_0_19/HLZ       	 = 50.0 mm
+d:Ge/C_0_19/HLX    	 = 0.075 mm
+d:Ge/C_0_19/HLY    	 = 5.0 mm
+d:Ge/C_0_19/TransX    	 = 4.42097803984621 mm
+d:Ge/C_0_19/TransY    	 = -9.25 mm
+d:Ge/C_0_19/TransZ    	 = 0.0 mm
+d:Ge/C_0_19/RotZ    	 = 79.8 deg
+
+# plane coating 1_0
+s:Ge/C_1_0/Type      	 = "TsBox"
+s:Ge/C_1_0/Parent    	 = "HGM"
+s:Ge/C_1_0/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_0/HLZ       	 = 50.0 mm
+d:Ge/C_1_0/HLX    	 = 0.075 mm
+d:Ge/C_1_0/HLY    	 = 5.0 mm
+d:Ge/C_1_0/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_0/TransY    	 = -9.75 mm
+d:Ge/C_1_0/TransZ    	 = 0.0 mm
+d:Ge/C_1_0/RotZ    	 = -79.8 deg
+
+# plane coating 1_1
+s:Ge/C_1_1/Type      	 = "TsBox"
+s:Ge/C_1_1/Parent    	 = "HGM"
+s:Ge/C_1_1/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_1/HLZ       	 = 50.0 mm
+d:Ge/C_1_1/HLX    	 = 0.075 mm
+d:Ge/C_1_1/HLY    	 = 5.0 mm
+d:Ge/C_1_1/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_1/TransY    	 = -8.75 mm
+d:Ge/C_1_1/TransZ    	 = 0.0 mm
+d:Ge/C_1_1/RotZ    	 = -79.8 deg
+
+# plane coating 1_2
+s:Ge/C_1_2/Type      	 = "TsBox"
+s:Ge/C_1_2/Parent    	 = "HGM"
+s:Ge/C_1_2/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_2/HLZ       	 = 50.0 mm
+d:Ge/C_1_2/HLX    	 = 0.075 mm
+d:Ge/C_1_2/HLY    	 = 5.0 mm
+d:Ge/C_1_2/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_2/TransY    	 = -7.75 mm
+d:Ge/C_1_2/TransZ    	 = 0.0 mm
+d:Ge/C_1_2/RotZ    	 = -79.8 deg
+
+# plane coating 1_3
+s:Ge/C_1_3/Type      	 = "TsBox"
+s:Ge/C_1_3/Parent    	 = "HGM"
+s:Ge/C_1_3/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_3/HLZ       	 = 50.0 mm
+d:Ge/C_1_3/HLX    	 = 0.075 mm
+d:Ge/C_1_3/HLY    	 = 5.0 mm
+d:Ge/C_1_3/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_3/TransY    	 = -6.75 mm
+d:Ge/C_1_3/TransZ    	 = 0.0 mm
+d:Ge/C_1_3/RotZ    	 = -79.8 deg
+
+# plane coating 1_4
+s:Ge/C_1_4/Type      	 = "TsBox"
+s:Ge/C_1_4/Parent    	 = "HGM"
+s:Ge/C_1_4/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_4/HLZ       	 = 50.0 mm
+d:Ge/C_1_4/HLX    	 = 0.075 mm
+d:Ge/C_1_4/HLY    	 = 5.0 mm
+d:Ge/C_1_4/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_4/TransY    	 = -5.75 mm
+d:Ge/C_1_4/TransZ    	 = 0.0 mm
+d:Ge/C_1_4/RotZ    	 = -79.8 deg
+
+# plane coating 1_5
+s:Ge/C_1_5/Type      	 = "TsBox"
+s:Ge/C_1_5/Parent    	 = "HGM"
+s:Ge/C_1_5/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_5/HLZ       	 = 50.0 mm
+d:Ge/C_1_5/HLX    	 = 0.075 mm
+d:Ge/C_1_5/HLY    	 = 5.0 mm
+d:Ge/C_1_5/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_5/TransY    	 = -4.75 mm
+d:Ge/C_1_5/TransZ    	 = 0.0 mm
+d:Ge/C_1_5/RotZ    	 = -79.8 deg
+
+# plane coating 1_6
+s:Ge/C_1_6/Type      	 = "TsBox"
+s:Ge/C_1_6/Parent    	 = "HGM"
+s:Ge/C_1_6/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_6/HLZ       	 = 50.0 mm
+d:Ge/C_1_6/HLX    	 = 0.075 mm
+d:Ge/C_1_6/HLY    	 = 5.0 mm
+d:Ge/C_1_6/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_6/TransY    	 = -3.75 mm
+d:Ge/C_1_6/TransZ    	 = 0.0 mm
+d:Ge/C_1_6/RotZ    	 = -79.8 deg
+
+# plane coating 1_7
+s:Ge/C_1_7/Type      	 = "TsBox"
+s:Ge/C_1_7/Parent    	 = "HGM"
+s:Ge/C_1_7/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_7/HLZ       	 = 50.0 mm
+d:Ge/C_1_7/HLX    	 = 0.075 mm
+d:Ge/C_1_7/HLY    	 = 5.0 mm
+d:Ge/C_1_7/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_7/TransY    	 = -2.75 mm
+d:Ge/C_1_7/TransZ    	 = 0.0 mm
+d:Ge/C_1_7/RotZ    	 = -79.8 deg
+
+# plane coating 1_8
+s:Ge/C_1_8/Type      	 = "TsBox"
+s:Ge/C_1_8/Parent    	 = "HGM"
+s:Ge/C_1_8/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_8/HLZ       	 = 50.0 mm
+d:Ge/C_1_8/HLX    	 = 0.075 mm
+d:Ge/C_1_8/HLY    	 = 5.0 mm
+d:Ge/C_1_8/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_8/TransY    	 = -1.75 mm
+d:Ge/C_1_8/TransZ    	 = 0.0 mm
+d:Ge/C_1_8/RotZ    	 = -79.8 deg
+
+# plane coating 1_9
+s:Ge/C_1_9/Type      	 = "TsBox"
+s:Ge/C_1_9/Parent    	 = "HGM"
+s:Ge/C_1_9/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_9/HLZ       	 = 50.0 mm
+d:Ge/C_1_9/HLX    	 = 0.075 mm
+d:Ge/C_1_9/HLY    	 = 5.0 mm
+d:Ge/C_1_9/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_9/TransY    	 = -0.75 mm
+d:Ge/C_1_9/TransZ    	 = 0.0 mm
+d:Ge/C_1_9/RotZ    	 = -79.8 deg
+
+# plane coating 1_10
+s:Ge/C_1_10/Type      	 = "TsBox"
+s:Ge/C_1_10/Parent    	 = "HGM"
+s:Ge/C_1_10/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_10/HLZ       	 = 50.0 mm
+d:Ge/C_1_10/HLX    	 = 0.075 mm
+d:Ge/C_1_10/HLY    	 = 5.0 mm
+d:Ge/C_1_10/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_10/TransY    	 = 0.25 mm
+d:Ge/C_1_10/TransZ    	 = 0.0 mm
+d:Ge/C_1_10/RotZ    	 = -79.8 deg
+
+# plane coating 1_11
+s:Ge/C_1_11/Type      	 = "TsBox"
+s:Ge/C_1_11/Parent    	 = "HGM"
+s:Ge/C_1_11/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_11/HLZ       	 = 50.0 mm
+d:Ge/C_1_11/HLX    	 = 0.075 mm
+d:Ge/C_1_11/HLY    	 = 5.0 mm
+d:Ge/C_1_11/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_11/TransY    	 = 1.25 mm
+d:Ge/C_1_11/TransZ    	 = 0.0 mm
+d:Ge/C_1_11/RotZ    	 = -79.8 deg
+
+# plane coating 1_12
+s:Ge/C_1_12/Type      	 = "TsBox"
+s:Ge/C_1_12/Parent    	 = "HGM"
+s:Ge/C_1_12/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_12/HLZ       	 = 50.0 mm
+d:Ge/C_1_12/HLX    	 = 0.075 mm
+d:Ge/C_1_12/HLY    	 = 5.0 mm
+d:Ge/C_1_12/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_12/TransY    	 = 2.25 mm
+d:Ge/C_1_12/TransZ    	 = 0.0 mm
+d:Ge/C_1_12/RotZ    	 = -79.8 deg
+
+# plane coating 1_13
+s:Ge/C_1_13/Type      	 = "TsBox"
+s:Ge/C_1_13/Parent    	 = "HGM"
+s:Ge/C_1_13/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_13/HLZ       	 = 50.0 mm
+d:Ge/C_1_13/HLX    	 = 0.075 mm
+d:Ge/C_1_13/HLY    	 = 5.0 mm
+d:Ge/C_1_13/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_13/TransY    	 = 3.25 mm
+d:Ge/C_1_13/TransZ    	 = 0.0 mm
+d:Ge/C_1_13/RotZ    	 = -79.8 deg
+
+# plane coating 1_14
+s:Ge/C_1_14/Type      	 = "TsBox"
+s:Ge/C_1_14/Parent    	 = "HGM"
+s:Ge/C_1_14/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_14/HLZ       	 = 50.0 mm
+d:Ge/C_1_14/HLX    	 = 0.075 mm
+d:Ge/C_1_14/HLY    	 = 5.0 mm
+d:Ge/C_1_14/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_14/TransY    	 = 4.25 mm
+d:Ge/C_1_14/TransZ    	 = 0.0 mm
+d:Ge/C_1_14/RotZ    	 = -79.8 deg
+
+# plane coating 1_15
+s:Ge/C_1_15/Type      	 = "TsBox"
+s:Ge/C_1_15/Parent    	 = "HGM"
+s:Ge/C_1_15/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_15/HLZ       	 = 50.0 mm
+d:Ge/C_1_15/HLX    	 = 0.075 mm
+d:Ge/C_1_15/HLY    	 = 5.0 mm
+d:Ge/C_1_15/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_15/TransY    	 = 5.25 mm
+d:Ge/C_1_15/TransZ    	 = 0.0 mm
+d:Ge/C_1_15/RotZ    	 = -79.8 deg
+
+# plane coating 1_16
+s:Ge/C_1_16/Type      	 = "TsBox"
+s:Ge/C_1_16/Parent    	 = "HGM"
+s:Ge/C_1_16/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_16/HLZ       	 = 50.0 mm
+d:Ge/C_1_16/HLX    	 = 0.075 mm
+d:Ge/C_1_16/HLY    	 = 5.0 mm
+d:Ge/C_1_16/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_16/TransY    	 = 6.25 mm
+d:Ge/C_1_16/TransZ    	 = 0.0 mm
+d:Ge/C_1_16/RotZ    	 = -79.8 deg
+
+# plane coating 1_17
+s:Ge/C_1_17/Type      	 = "TsBox"
+s:Ge/C_1_17/Parent    	 = "HGM"
+s:Ge/C_1_17/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_17/HLZ       	 = 50.0 mm
+d:Ge/C_1_17/HLX    	 = 0.075 mm
+d:Ge/C_1_17/HLY    	 = 5.0 mm
+d:Ge/C_1_17/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_17/TransY    	 = 7.25 mm
+d:Ge/C_1_17/TransZ    	 = 0.0 mm
+d:Ge/C_1_17/RotZ    	 = -79.8 deg
+
+# plane coating 1_18
+s:Ge/C_1_18/Type      	 = "TsBox"
+s:Ge/C_1_18/Parent    	 = "HGM"
+s:Ge/C_1_18/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_18/HLZ       	 = 50.0 mm
+d:Ge/C_1_18/HLX    	 = 0.075 mm
+d:Ge/C_1_18/HLY    	 = 5.0 mm
+d:Ge/C_1_18/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_18/TransY    	 = 8.25 mm
+d:Ge/C_1_18/TransZ    	 = 0.0 mm
+d:Ge/C_1_18/RotZ    	 = -79.8 deg
+
+# plane coating 1_19
+s:Ge/C_1_19/Type      	 = "TsBox"
+s:Ge/C_1_19/Parent    	 = "HGM"
+s:Ge/C_1_19/Material  	 = "G4_GLASS_LEAD"
+d:Ge/C_1_19/HLZ       	 = 50.0 mm
+d:Ge/C_1_19/HLX    	 = 0.075 mm
+d:Ge/C_1_19/HLY    	 = 5.0 mm
+d:Ge/C_1_19/TransX    	 = -5.42097803984621 mm
+d:Ge/C_1_19/TransY    	 = 9.25 mm
+d:Ge/C_1_19/TransZ    	 = 0.0 mm
+d:Ge/C_1_19/RotZ    	 = -79.8 deg
+
