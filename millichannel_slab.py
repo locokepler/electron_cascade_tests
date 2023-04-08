@@ -101,9 +101,10 @@ mill_box += "s:Sc/backplane/Surface = \"BackPlate/XPlusSurface\"\n"
 mill_box += "s:Sc/backplane/OutputType = \"ASCII\"\n"
 mill_box += "b:Sc/backplane/IncludeTimeOfFlight = \"True\"\n"
 mill_box += "s:Sc/backplane/IncludeEmptyHistories = \"InSequence\"\n"
+mill_box += "b:Sc/backplane/IncludeTrackID     \t = \"True\"\n"
 mill_box += "b:Sc/backplane/IncludeRunID = \"True\"\n"
 mill_box += "sv:Sc/backplane/OnlyIncludeParticlesCharged = 1 \"negative\"\n"
-mill_box += "s:Sc/backplane/IfOutputFileAlreadyExists = \"Increment\"\n"
+mill_box += "s:Sc/backplane/IfOutputFileAlreadyExists = \"Overwrite\"\n"
 mill_box += "b:Sc/backplane/PropagateToChildren = \"false\"\n"
 
 corner = [(k_mm + fudge_mm) / 2 - (beta_mm*2 + (gamma_mm / 2)), l_mm / 2 - (t_mm + (alpha_mm / 2))]
@@ -125,5 +126,7 @@ for i in range(int(n)):
         hole_structure += "d:Ge/" + str(i) + "_" + str(j) + "/TransY = " + str(corner[0] - (j * (beta_mm + gamma_mm))) + " mm\n"
         hole_structure += "d:Ge/" + str(i) + "_" + str(j) + "/TransZ = " + str(corner[1] - (i * (t_mm + alpha_mm))) + " mm\n"
         # hole_structure += "d:Ge/" + str(i) + "_" + str(j) + "/TransX = \n"
+
+file_text += "# Corner:\n#\tx = " + str((w_mm + fudge_mm) / 2) + " mm\n#\ty = " + str(corner[0]) + " mm\n#\tz = " + str(corner[1]) + " mm\n"
 
 print(file_text + mill_box + hole_structure)
