@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.animation as animation
 
 
-full_data = np.loadtxt("combined.phsp")
+full_data = np.loadtxt("combined_backplane.phsp")
+full_data = full_data[full_data[:, 6] > 0,:]
+print(np.shape(full_data))
 
 all_points = np.zeros((np.shape(full_data)[0], 3))
 all_points[:,0] = full_data[:,1]
