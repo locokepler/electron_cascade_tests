@@ -1,4 +1,5 @@
 import numpy as np
+from os.path import isfile
 
 # Takes in a phasespace file from TOPAS and makes secondary electrons from given information
 
@@ -25,9 +26,10 @@ import numpy as np
 
 # To maintain good behavior of the backplane outputter, the backplane combiner code must be
 # run on every generation of secondaries. This is necessasary to have the right history
-# information available to the backplane for giving correct total times. 
-
-generation = 18
+# information available to the backplane for giving correct total times.
+# For this reason backplane combiner code is now contained within this handling code. Each
+# time it moves forward a history in the main tuple file it appends the current working
+# history to the backplane file 
 
 
 # read in the line from the phase space scorer:
@@ -37,8 +39,27 @@ source_file = "full_HGM"
 starting_histories = np.loadtxt(source_file + ".phsp")
 print(np.shape(starting_histories))
 
+backplane_source_file = "backplane"
+backplane_histories = np.loadtxt(backplane_source_file + ".phsp")
+backplane_out = []
+backplane_index = 0
+
+# time data storage file name
+time_file = "time_data"
+time_source = np.loadtxt(time_file)
+print(np.shape(time_source))
+
+existing_time = 0
+if (np.shape(time_source)[0] != 0):
+    existing_time = 1
+
+history_number = -1
+time_saves = []
+total_histories = 0
+recorded_histories = 0
 
 total_electrons = 0
+
 
 # output = "generation_" + str(generation + 1) + "/"
 # output += "output"
@@ -57,24 +78,48 @@ for i in range(np.shape(starting_histories)[0]):
     # If it's empty then we just reoutput it and move to the next line.
     working_hist = starting_histories[i,:]
     if (working_hist[9]):
-        if (not prior_hist_written):
-            all_hists = np.append(all_hists, [blank_hist], axis=0)
-        prior_hist_written = 0
+        history_number += 1
+        # print("read history " + str(history_number))
+
+        # now we need to write the backplane phsp to its output for the current history
+        current_backplane = backplane_histories[backplane_index, :]
+        if (existing_time):
+            current_backplane[10] += time_source[history_number - 1]
+        backplane_out.append(str(current_backplane[0]) + " " + str(current_backplane[1]) + " " + str(current_backplane[2]) + " " + str(current_backplane[3]) + " " + str(current_backplane[4]) + " " + str(current_backplane[5]) + " " + str(current_backplane[6]) + " " + str(current_backplane[7]) + " " + str(current_backplane[8]) + " " + str(current_backplane[9]) + " " + str(current_backplane[10]) + " " + str(current_backplane[11]) + "\n")
+        backplane_index += 1
+        while ((backplane_index < np.shape(backplane_histories)[0]) and (backplane_histories[backplane_index, 9] == 0)):
+            current_backplane = backplane_histories[backplane_index, :]
+            if (existing_time):
+                current_backplane[10] += time_source[history_number - 1]
+            backplane_out.append(str(current_backplane[0]) + " " + str(current_backplane[1]) + " " + str(current_backplane[2]) + " " + str(current_backplane[3]) + " " + str(current_backplane[4]) + " " + str(current_backplane[5]) + " " + str(current_backplane[6]) + " " + str(current_backplane[7]) + " " + str(current_backplane[8]) + " " + str(current_backplane[9]) + " " + str(current_backplane[10]) + " " + str(current_backplane[11]) + "\n")
+            backplane_index += 1
+
 
     if ((working_hist[6] == 1) and (working_hist[7] == 11) and (working_hist[5] > 0.0001)):
         # if the weight of the history is 1 (so we have a real history)
         # We have also checked that it is an electron, and it has enough energy
 
         # If not empty then we need to go through the process of making secondaries
+        first_in_hist = 1
         
         # what energy is it at, find the correct distribution of new electrons
         prior_hist_written = 1
         energy_MeV = working_hist[5] # measured in MeV
 
+        # lets record the time of this interaction within the history
+        run_time = working_hist[10]
+        if (existing_time):
+            run_time += time_source[history_number]
+        # print(run_time)
+
+        time_saves.append(str(run_time) + "\n")
+
         number_of_electrons = 5
 
         electron_energy_MeV = 0.00005
         total_electrons += number_of_electrons
+        total_histories += 1
+        recorded_histories +=1
 
         new_electrons = np.zeros((number_of_electrons, 13))
         # print(np.shape(new_electrons))
@@ -113,6 +158,12 @@ for i in range(np.shape(starting_histories)[0]):
         # print(np.shape(all_hists))
 
         # np.savetxt(output, new_electrons, fmt='%12f %12f %12f %12f %12f %12f %12i %12i %2i %2i %12d %12i')
+    if (working_hist[9]):
+        if (not prior_hist_written):
+            all_hists = np.append(all_hists, [blank_hist], axis=0)
+            time_saves.append(str(0.0) + "\n")
+            total_histories += 1
+        prior_hist_written = 0
 
 
 
@@ -126,6 +177,8 @@ print(total_electrons)
     
 header = open(source_file + ".header", "r")
 full_file = header.readlines()
+full_file[2] = "Number of Original Histories: " + str(int(total_histories)) + "\n"
+full_file[3] = "Number of Original Histories that Reached Phase Space: " + str(int(recorded_histories)) + "\n"
 full_file[4] = "Number of Scored Particles: " + str(int(total_electrons)) + "\n"
 
 out_header = open(output + ".header", "w")
@@ -133,3 +186,11 @@ out_header = open(output + ".header", "w")
 out_header.writelines(full_file)
 
 out_header.close()
+
+time_out = open(time_file, "w")
+
+time_out.writelines(time_saves)
+
+combined_backplanes = "combined.phsp"
+combined_out = open(combined_backplanes, "a")
+combined_out.writelines(backplane_out)
