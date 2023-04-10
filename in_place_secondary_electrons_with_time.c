@@ -373,6 +373,8 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
     phase_space_data.scored_particles = 0;
     phase_space_data.internal_size = 0;
     phase_space_data.size = 0;
+    
+    uint iteration_count = 0;
 
     int current_load_hist = -1;
     time_record* time_out = time_record_creation();
@@ -390,8 +392,8 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
     //  read in a phase space,
 
     while (current_interaction != NULL) {
-        if ((phase_space_data.scored_particles % 1000000) == 0) {
-            printf("Output particle number %i\n", phase_space_data.scored_particles);
+        if ((iteration_count % 1000000) == 0) {
+            printf("Secondaries iteration count: %i\n", iteration_count);
         }
         current_load_hist += current_interaction->first_scored_flag;
         // skip if it is an empty history
@@ -423,6 +425,7 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
         }
         free(current_interaction);
         current_interaction = read_pshp_line(input);
+        iteration_count++;
     }
 
     // loop now done, print out the header for the above phsp file
