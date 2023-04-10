@@ -324,6 +324,38 @@ interaction* generate_secondary_electrons(interaction* a, uint* produced) {
     }
 }
 
+void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record* hist_times) {
+    if ((in_backplane == NULL) || (out_backplane == NULL)) {
+        // we do not have a backplane input or output
+        fprintf(stderr, "append_backplane_file: missing input or output!\n");
+        return;
+    }
+    int use_times = 1;
+    if (hist_times == NULL) {
+        // this is our first read in, all TOFs are correct
+        use_times = 0;
+    }
+    int current_hist = 0;
+    interaction* current_interaction = read_pshp_line(in_backplane);
+
+    // print the interactions to the backplane file, (assuming they are not empty)
+    while (current_interaction != NULL) {
+        // check if it is an empty history
+        if (current_interaction->weight > 0) {
+            // non-empty history
+            // fix tof if needed
+            if (use_times) {
+                current_interaction->tof += hist_times->read_history_time(hist_times, current_hist);
+            }
+            print_phsp_line(out_backplane, current_interaction);
+        }
+
+        current_hist += current_interaction->first_scored_flag;
+        free(current_interaction);
+        current_interaction = read_pshp_line(in_backplane);
+    }
+}
+
 time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FILE* output_header, time_record* hist_times) {
     if ((input == NULL) || (output_phsp == NULL) || (output_header == NULL)) {
         fprintf(stderr, "low_memory_generate_secondaries: needed input NULL\n");
@@ -488,11 +520,9 @@ int main(int argc, char const *argv[]) {
 
     // handle the backplane information, if the backplane exists
     if (backplane_input_file != NULL) {
-        phasespace* backplane_phasespace = load_phasespace(backplane_input_file, input_times);
+        append_backplane_file(backplane_input_file, backplane_output_file, input_times);
+
         fclose(backplane_input_file);
-        remove_empty_histories(backplane_phasespace);
-        print_phasespace_phsp(backplane_output_file, backplane_phasespace);
-        free_phasespace(backplane_phasespace);
         fclose(backplane_output_file);
     }
     printf("Finished loading and saving of backplane file\n");
