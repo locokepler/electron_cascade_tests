@@ -390,8 +390,8 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
     //  read in a phase space,
 
     while (current_interaction != NULL) {
-        if ((current_load_hist % 1000000) == 0) {
-            printf("Input history %i\n", current_load_hist);
+        if ((phase_space_data.scored_particles % 1000000) == 0) {
+            printf("Output particle number %i\n", phase_space_data.scored_particles);
         }
         current_load_hist += current_interaction->first_scored_flag;
         // skip if it is an empty history
