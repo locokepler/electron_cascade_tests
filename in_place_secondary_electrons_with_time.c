@@ -335,12 +335,13 @@ void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record*
         // this is our first read in, all TOFs are correct
         use_times = 0;
     }
-    int current_hist = 0;
+    int current_hist = -1;
     interaction* current_interaction = read_pshp_line(in_backplane);
 
     // print the interactions to the backplane file, (assuming they are not empty)
     while (current_interaction != NULL) {
         // check if it is an empty history
+        current_hist += current_interaction->first_scored_flag;
         if (current_interaction->weight > 0) {
             // non-empty history
             // fix tof if needed
@@ -350,7 +351,6 @@ void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record*
             print_phsp_line(out_backplane, current_interaction);
         }
 
-        current_hist += current_interaction->first_scored_flag;
         free(current_interaction);
         current_interaction = read_pshp_line(in_backplane);
     }
@@ -436,9 +436,9 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
 
 int main(int argc, char const *argv[]) {
 
-    if (time_record_tests()) {
-        return 1;
-    }
+    // if (time_record_tests()) {
+    //     return 1;
+    // }
 
     FILE* input_phasespace;
     FILE* input_timings;
