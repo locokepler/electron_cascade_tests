@@ -9,6 +9,10 @@
 # N = 23.0
 # M = 4
 # material: "G4_GLASS_LEAD"
+# Corner:
+#	x = 5.15 mm
+#	y = 4.036200000000001 mm
+#	z = 2.3222 mm
 
 # the box of the millichannel slab
 s:Ge/millichannel/Type     = "TsBox"
@@ -52,9 +56,10 @@ s:Sc/backplane/Surface = "BackPlate/XPlusSurface"
 s:Sc/backplane/OutputType = "ASCII"
 b:Sc/backplane/IncludeTimeOfFlight = "True"
 s:Sc/backplane/IncludeEmptyHistories = "InSequence"
+b:Sc/backplane/IncludeTrackID     	 = "True"
 b:Sc/backplane/IncludeRunID = "True"
 sv:Sc/backplane/OnlyIncludeParticlesCharged = 1 "negative"
-s:Sc/backplane/IfOutputFileAlreadyExists = "Increment"
+s:Sc/backplane/IfOutputFileAlreadyExists = "Overwrite"
 b:Sc/backplane/PropagateToChildren = "false"
 
 
