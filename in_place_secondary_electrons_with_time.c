@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 #define PI 3.141592653589
 #define HIST_BUFFER 100
 #define MIN_ENG 0.0001
 #define MAX_ELECTRONS 5
 #define UNCERT_REP 12
+#define HISTORY_CULL_THRESHOLD 1000000
 
 
 typedef struct safestring_ {
@@ -55,6 +57,16 @@ interaction* read_pshp_line(FILE* input) {
         return NULL;
     }
     return new;
+}
+
+// takes a cull file and reads in the value contained within
+int read_cull_file(FILE* input) {
+    if (input == NULL) {
+        return 1;
+    }
+    int data;
+    fscanf(input, "%i", &data);
+    return data;
 }
 
 void print_phsp_line(FILE* output, interaction* data) {
@@ -295,16 +307,16 @@ interaction* generate_secondary_electrons(interaction* a, uint* produced) {
                 eng_var += drand48();
             }
             eng_var -= ((float)(UNCERT_REP) * 0.5);
-            eng_var *= 2;
-            eng_var += 10;
+            eng_var *= 1.0;
+            eng_var += 6.0;
             if (eng_var < 4) {
-                eng_var = 4;
+                eng_var = 4.0;
             }
             eng_var = eng_var / 1000000;
             output[i].energy_MeV = eng_var;
 
             // now we give each one a direction
-            double dist_theta = (2 * acos((2.0 * drand48()) - 1.0)) - PI;
+            double dist_theta = (acos((2.0 * drand48()) - 1.0));// - (PI * 0.5);
             double dist_phi = 2 * PI * drand48();
             double dist_x = cos(dist_phi) * sin(dist_theta);
             double dist_y = sin(dist_phi) * sin(dist_theta);
@@ -324,7 +336,12 @@ interaction* generate_secondary_electrons(interaction* a, uint* produced) {
     }
 }
 
-void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record* hist_times) {
+/* append_backplane_file
+ * Takes a backplane file input location, file output location, and the cull factor of the previous run
+ * and appends the input backplane file to the output file location. The recorded weight is the cull
+ * factor, allowing for individual electrons to count for more in the final data.
+ */
+void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record* hist_times, int cull) {
     if ((in_backplane == NULL) || (out_backplane == NULL)) {
         // we do not have a backplane input or output
         fprintf(stderr, "append_backplane_file: missing input or output!\n");
@@ -348,6 +365,7 @@ void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record*
             if (use_times) {
                 current_interaction->tof += hist_times->read_history_time(hist_times, current_hist);
             }
+            current_interaction->weight = cull;
             print_phsp_line(out_backplane, current_interaction);
         }
 
@@ -356,7 +374,7 @@ void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record*
     }
 }
 
-time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FILE* output_header, time_record* hist_times) {
+time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FILE* output_header, time_record* hist_times, int* cull_total) {
     if ((input == NULL) || (output_phsp == NULL) || (output_header == NULL)) {
         fprintf(stderr, "low_memory_generate_secondaries: needed input NULL\n");
         return NULL;
@@ -365,6 +383,20 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
     if (hist_times != NULL) {
         use_times = 1;
     }
+    // will we need to cull the electron entries?
+    int current_cull = 1;
+    if ((use_times) && (hist_times->size > HISTORY_CULL_THRESHOLD)) {
+        // we need to do a cull, so how many factors of two are needed
+        int working_size = hist_times->size;
+        for (; working_size > HISTORY_CULL_THRESHOLD; ) {
+            working_size = working_size >> 1;
+            current_cull = current_cull << 1;
+            cull_total[0] = cull_total[0] << 1;
+        }
+        printf("Culling by a factor of %i\nTotal cull factor of %i\n", current_cull, cull_total[0]);
+    }
+
+
     // set up phase space record for the making of the header file
     phasespace phase_space_data;
     phase_space_data.data = NULL;
@@ -396,8 +428,15 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
             printf("Secondaries iteration count: %i\n", iteration_count);
         }
         current_load_hist += current_interaction->first_scored_flag;
+
+        // check if we need a cull and if this one would be a culled run
+        int culled = 0;
+        if ((current_cull != 1) && ((rand() % current_cull) == 0)) {
+            culled = 1;
+        }
+
         // skip if it is an empty history
-        if (current_interaction->weight > 0) {
+        if ((!culled) && (current_interaction->weight > 0)) {
             // add input time to TOF
             if (use_times) {
                 current_interaction->tof += hist_times->read_history_time(hist_times, current_load_hist);
@@ -452,6 +491,9 @@ int main(int argc, char const *argv[]) {
     FILE* output_phasespace_tuple_file;
     FILE* output_phasespace_header_file;
 
+    int cull;
+    srand48(time(NULL));
+
     if (argc == 6) {
         safestring input_detector_phasespace_tuple_name;
         input_detector_phasespace_tuple_name.len = strlen(argv[1]) + 10;
@@ -502,6 +544,8 @@ int main(int argc, char const *argv[]) {
         backplane_input_file = fopen(backplane_input_tuple_name.string, "r");
         backplane_output_file = fopen(backplane_output_tuple_name.string, "a");
 
+        FILE* cull_factor_file = fopen("cull.temp", "r");
+        cull = read_cull_file(cull_factor_file);
     } else {
         fprintf(stderr, "Incorrect number of arguments, expected 5:\n");
         fprintf(stderr, "\t1: input detector phasespace\n");
@@ -523,14 +567,14 @@ int main(int argc, char const *argv[]) {
 
     // handle the backplane information, if the backplane exists
     if (backplane_input_file != NULL) {
-        append_backplane_file(backplane_input_file, backplane_output_file, input_times);
+        append_backplane_file(backplane_input_file, backplane_output_file, input_times, cull);
 
         fclose(backplane_input_file);
         fclose(backplane_output_file);
     }
     printf("Finished loading and saving of backplane file\n");
 
-    time_record* result_times = low_memory_generate_secondaries(input_phasespace, output_phasespace_tuple_file, output_phasespace_header_file, input_times);
+    time_record* result_times = low_memory_generate_secondaries(input_phasespace, output_phasespace_tuple_file, output_phasespace_header_file, input_times, &cull);
 
     FILE* time_output = fopen(argv[2], "w");
     // open the timings file again, this time for writing
@@ -542,7 +586,10 @@ int main(int argc, char const *argv[]) {
     destroy_time_record(result_times);
     // clean up the timing handling
 
-    
+    FILE* cull_factor_file = fopen("cull.temp", "w");
+    fprintf(cull_factor_file, "%i", cull);
+    fclose(cull_factor_file);
+
 
     return 0;
 }
