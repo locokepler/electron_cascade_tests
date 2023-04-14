@@ -388,7 +388,7 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
     if ((use_times) && (hist_times->size > HISTORY_CULL_THRESHOLD)) {
         // we need to do a cull, so how many factors of two are needed
         int working_size = hist_times->size;
-        for (; working_size > HISTORY_CULL_THRESHOLD; ) {
+        while (working_size > HISTORY_CULL_THRESHOLD) {
             working_size = working_size >> 1;
             current_cull = current_cull << 1;
             cull_total[0] = cull_total[0] << 1;
@@ -431,7 +431,7 @@ time_record* low_memory_generate_secondaries(FILE* input, FILE* output_phsp, FIL
 
         // check if we need a cull and if this one would be a culled run
         int culled = 0;
-        if ((current_cull != 1) && ((rand() % current_cull) == 0)) {
+        if ((current_cull != 1) && ((rand() % current_cull) != 0)) {
             culled = 1;
         }
 
