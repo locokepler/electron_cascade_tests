@@ -35,6 +35,7 @@ k_mm = m * (beta_mm + gamma_mm) + beta_mm
 n = np.floor((l_mm - t_mm) / (t_mm + alpha_mm))
 
 parent_nm = "millichannel"
+plate_nm = "mill_plate"
 
 file_text = "# A TOPAS file defining the millichannel slab design for testing\n"
 file_text += "# alpha = " + str(alpha_mm) + "mm\n"
@@ -50,13 +51,14 @@ file_text += "# material: " + material + "\n"
 
 # build the big box
 
-mill_box = "\n# the box of the millichannel slab\n"
+mill_box = "\n# the box holding the millichannel slab\n"
 mill_box += "s:Ge/" + parent_nm + "/Type     = \"TsBox\"\n"
-mill_box += "s:Ge/" + parent_nm + "/Material = " + material + "\n"
+mill_box += "s:Ge/" + parent_nm + "/Material = \"vacuum\"\n"
 mill_box += "d:Ge/" + parent_nm + "/HLX = " + str((w_mm + fudge_mm) / 2) + " mm\n"
 mill_box += "d:Ge/" + parent_nm + "/HLY = " + str(k_mm / 2) + " mm\n"
 mill_box += "d:Ge/" + parent_nm + "/HLZ = " + str(l_mm / 2) + " mm\n"
 # mill_box += "s:Ge/" + parent_nm + "/ = \n"
+
 
 mill_box += "s:Ge/" + parent_nm + "/Field                   = \"UniformElectroMagnetic\"\n"
 mill_box += "u:Ge/" + parent_nm + "/ElectricFieldDirectionX = -1\n"
@@ -67,6 +69,14 @@ mill_box += "u:Ge/" + parent_nm + "/MagneticFieldDirectionX = 0\n"
 mill_box += "u:Ge/" + parent_nm + "/MagneticFieldDirectionY = 1\n"
 mill_box += "u:Ge/" + parent_nm + "/MagneticFieldDirectionZ = 0\n"
 mill_box += "d:Ge/" + parent_nm + "/MagneticFieldStrength   = 0.0 tesla\n"
+
+mill_box += "\n# the actual millichannel slab\n"
+mill_box += "s:Ge/" + plate_nm + "/Type     = \"TsBox\"\n"
+mill_box += "s:Ge/" + plate_nm + "/Parent     = \"" + parent_nm + "\"\n"
+mill_box += "s:Ge/" + plate_nm + "/Material = " + material + "\n"
+mill_box += "d:Ge/" + plate_nm + "/HLX = " + str((w_mm) / 2) + " mm\n"
+mill_box += "d:Ge/" + plate_nm + "/HLY = " + str(k_mm / 2) + " mm\n"
+mill_box += "d:Ge/" + plate_nm + "/HLZ = " + str(l_mm / 2) + " mm\n"
 
 mill_box += "\n# phase space scorer for the whole HGM (for secondary electron emission)\n"
 mill_box += "s:Sc/full_HGM/Quantity   \t = \"PhaseSpace\"\n"
@@ -118,7 +128,7 @@ for i in range(int(n)):
         # a z of corner[1] - i * (t + alpha)
         hole_structure += "\n# hole " + str(i) + "_" + str(j) + "\n"
         hole_structure += "s:Ge/" + str(i) + "_" + str(j) + "/Type = \"TsBox\"\n"
-        hole_structure += "s:Ge/" + str(i) + "_" + str(j) + "/Parent = \"" + parent_nm + "\"\n"
+        hole_structure += "s:Ge/" + str(i) + "_" + str(j) + "/Parent = \"" + plate_nm + "\"\n"
         hole_structure += "s:Ge/" + str(i) + "_" + str(j) + "/Material = \"Vacuum\"\n"
         hole_structure += "d:Ge/" + str(i) + "_" + str(j) + "/HLX = " + str(w_mm / 2) + " mm\n"
         hole_structure += "d:Ge/" + str(i) + "_" + str(j) + "/HLY = " + str(gamma_mm / 2) + " mm\n"
