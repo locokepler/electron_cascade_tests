@@ -8,4 +8,4 @@ python3 millichannel_slab.py > demo_LMCP.topas
 
 ./externally_generated_secondary_iterate.sh demo_electron.phsp demo_backplane.phsp
 
-# python3 backplane_animator.py
+python3 backplane_plots.py
