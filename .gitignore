@@ -1,0 +1,9 @@
+*.phsp
+*.header
+*.o
+*.jpg
+*.png
+testing.py
+settings.json
+*.temp
+run_zone/*
