@@ -51,9 +51,12 @@ fig_time = plt.figure()
 time_plt = fig_time.add_subplot()
 fig_time.subplots_adjust(bottom=top_of_graph-graph_size,top=top_of_graph,left=right_of_graph-graph_size,right=right_of_graph)
 
-t_hist, t_bins = np.histogram(times, bins=50)
+t_hist, t_bins = np.histogram(times, bins=50, weights=all_points[:,2])
 
-time_plt.bar(t_bins[:-1], t_hist, width=t_bins[1:] - t_bins[:-1])
+time_plt.bar(t_bins[:-1], (t_hist / ((t_bins[1:] - t_bins[:-1]) * e_per_coulomb)) * 1000 * 1e9, width=t_bins[1:] - t_bins[:-1])
+
+time_plt.set_xlabel("time (ns)")
+time_plt.set_ylabel("current (mA)")
 
 
 x = all_points[:, 0]
@@ -65,22 +68,23 @@ ymin, ymax = -np.amax(-y), np.amax(y)
 xx, yy = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
 positions = np.vstack([xx.ravel(), yy.ravel()])
 values = np.vstack([x, y])
-kernel = st.gaussian_kde(values)
+kernel = st.gaussian_kde(values, weights=all_points[:,2])
 f = np.reshape(kernel(positions).T, xx.shape)
 
 fig = plt.figure()
+fig.subplots_adjust(bottom=top_of_graph-graph_size,top=top_of_graph,left=right_of_graph-graph_size,right=right_of_graph)
 ax = fig.gca()
 
 # Contourf plot
-cfset = ax.contourf(xx, yy, f, cmap='Blues')
+cfset = ax.contourf(xx, yy, f, cmap='viridis')
 ## Or kernel density estimate plot instead of the contourf plot
 #ax.imshow(np.rot90(f), cmap='Blues', extent=[xmin, xmax, ymin, ymax])
 # Contour plot
 cset = ax.contour(xx, yy, f, colors='k')
 # Label plot
 ax.clabel(cset, inline=1, fontsize=10)
-ax.set_xlabel('Y1')
-ax.set_ylabel('Y0')
+ax.set_xlabel('cm')
+ax.set_ylabel('cm')
 
 plt.show()
 
