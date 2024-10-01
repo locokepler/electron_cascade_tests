@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.animation as animation
 
 
-full_data = np.loadtxt("combined_backplane.phsp")
+# full_data = np.loadtxt("combined_backplane.phsp")
+# full_data = np.loadtxt("full_channel_test.phsp")
+full_data = np.loadtxt("demo_backplane.phsp")
 full_data = full_data[full_data[:, 6] > 0,:]
 print(np.shape(full_data))
 

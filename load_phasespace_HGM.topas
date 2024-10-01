@@ -1,29 +1,34 @@
 
-# b:Gr/ViewA/Active	= "true"
-b:Gr/ViewA/Active	= "false"
-b:Gr/ViewB/Active	= "false"
-b:Gr/ViewC/Active	= "false"
-b:Gr/ViewD/Active	= "false"
+# b:Gr/ViewA/Active	= "true" # Uncomment this view (including the stuff way below) if you want to see it as you go. Dont do so on big runs
+# b:Gr/ViewA/Active	= "false"
+# b:Gr/ViewB/Active	= "false"
+# b:Gr/ViewC/Active	= "false"
+# b:Gr/ViewD/Active	= "false"
 
 #sv:Ph/Default/Modules = 1 "g4em-standard_opt1"
 #d:Ph/Default/CutForElectron = 0.5 um # overrides CutForAllParticles for Electron
-sv:Ph/Default/Modules = 2 "g4em-standard_opt4" "g4em-penelope"
+sv:Ph/Default/Modules = 1 "g4em-standard_opt4" #"g4em-penelope"
 
 i:Ts/ShowHistoryCountAtInterval = 100000
-i:Ts/NumberOfThreads = 1
+i:Ts/NumberOfThreads = 1 # must be 1 to prevent racing issues breaking timing tracking
 b:Ge/CheckForOverlaps = "false"
 
 b:Gr/ViewA/UseSmoothTrajectories = "False" # defaults to "True"
 
 
+# b:Ts/PauseBeforeQuit = "true"
 b:Ts/PauseBeforeQuit = "false"
 b:Ts/UseQt = "false"
 
-# includeFile = /Users/keplerdomurat-sousa/Desktop/electron_cascade_tests/ribbon_phase_space_test.topas
+# includeFile = /Users/keplerdomurat-sousa/Desktop/analysis/electron_cascade_tests/ribbon_phase_space_test.topas
 
 # s:Ge/HGM/Parent = "World"
 
-includeFile = /Users/keplerdomurat-sousa/Desktop/electron_cascade_tests/millichannel_form.topas
+# includeFile = /Users/keplerdomurat-sousa/Desktop/analysis/electron_cascade_tests/millichannel_form.topas
+
+# s:Ge/millichannel/Parent = "World"
+
+includeFile = ../demo_LMCP.topas # for demonstration purposes only
 
 s:Ge/millichannel/Parent = "World"
 
@@ -46,7 +51,7 @@ b:Ge/World/Invisible = "TRUE"
 
 s:So/LoadedPhasespace/Type                  = "Phasespace"
 s:So/LoadedPhasespace/PhaseSpaceFileName    = "output"
-#s:So/LoadedPhasespace/Component             = "HGM"
+# s:So/LoadedPhasespace/Component             = "HGM"
 s:So/LoadedPhasespace/Component             = "millichannel"
 b:So/LoadedPhasespace/IncludeEmptyHistories = "true"
 b:So/LoadedPhasespace/PhaseSpacePreCheck = "false" # defaults to true
@@ -54,7 +59,7 @@ b:So/LoadedPhasespace/PhaseSpacePreCheck = "false" # defaults to true
 # s:So/LoadedPhasespace/Type                  = "Phasespace"
 
 
-# s:Gr/ViewA/Type           = "OpenGL"
+# s:Gr/ViewA/Type           = "OpenGL" # goes with the graphics stuff in the first lines
 # sv:Gr/ViewA/VisibleWorlds = 1 "All"
 # i:Gr/ViewA/WindowSizeX    = 900
 # i:Gr/ViewA/WindowSizeY    = 900
