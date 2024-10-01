@@ -7,8 +7,8 @@
 
 #define PI 3.141592653589
 #define HIST_BUFFER 100
-#define MIN_ENG 0.0001
-#define MAX_ELECTRONS 5
+#define MIN_ENG 0.0001 // minimum energy for which secondaries are created
+#define MAX_ELECTRONS 10 // probably should be 2x the real SEY because half of electrons will be generated going the wrong way
 #define UNCERT_REP 12
 #define HISTORY_CULL_THRESHOLD 1000000
 
@@ -274,14 +274,14 @@ interaction* generate_secondary_electrons(interaction* a, uint* produced) {
     if ((a == NULL) || (produced == NULL)) {
         return NULL;
     }
-    int test_a = (a->type == 11);
-    int test_b = (a->energy_MeV > MIN_ENG);
+    int test_a = (a->type == 11); // is it an electron
+    int test_b = (a->energy_MeV > MIN_ENG); // is the energy above the cutoff, generally 100 eV
     if (test_a && test_b) {
         
         int max_number_of_electrons = MAX_ELECTRONS;
         interaction* output = (interaction*)calloc(MAX_ELECTRONS, sizeof(interaction));
         // lets make a linear interpolation to E_m, the energy of  peak secondary emission
-        float E_m_MeV = 5e-4;
+        float E_m_MeV = 5e-4; // currently 500 eV gives the maximum number of electrons, anything higher energy gives the same
         int number_of_electrons = (int)roundf((float)max_number_of_electrons * (a->energy_MeV / E_m_MeV));
         if (number_of_electrons > max_number_of_electrons) {
             number_of_electrons = max_number_of_electrons;
@@ -307,9 +307,10 @@ interaction* generate_secondary_electrons(interaction* a, uint* produced) {
                 eng_var += drand48();
             }
             eng_var -= ((float)(UNCERT_REP) * 0.5);
-            eng_var *= 1.0;
-            eng_var += 6.0;
-            if (eng_var < 4) {
+            eng_var *= 1.0; // scale of variation (in eV)
+            eng_var += 6.0; // center of the energy distribution
+            if (eng_var < 4) { // set initial electron energy floor of 4 eV. Don't know what the true minimum
+			// at which TOPAS won't do anything is.
                 eng_var = 4.0;
             }
             eng_var = eng_var / 1000000;
@@ -359,7 +360,7 @@ void append_backplane_file(FILE* in_backplane, FILE* out_backplane, time_record*
     while (current_interaction != NULL) {
         // check if it is an empty history
         current_hist += current_interaction->first_scored_flag;
-        if (current_interaction->weight > 0) {
+        if ((current_interaction->weight > 0) && (current_interaction->energy_MeV > 1e-5)) { // exists as a history and has a bit of energy (not jsut the result of duplicating on the backplane)
             // non-empty history
             // fix tof if needed
             if (use_times) {
@@ -494,7 +495,7 @@ int main(int argc, char const *argv[]) {
     int cull;
     srand48(time(NULL));
 
-    if (argc == 6) {
+    if (argc == 6) { // process the code arguments
         safestring input_detector_phasespace_tuple_name;
         input_detector_phasespace_tuple_name.len = strlen(argv[1]) + 10;
         input_detector_phasespace_tuple_name.string = (char*)calloc(strlen(argv[1]) + 10, sizeof(char));
